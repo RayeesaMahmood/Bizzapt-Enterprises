@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>UI/UX Design Services | Bizzapt Enterprises</title>
+<meta name="description" content="Professional UI/UX Design services for startups — user research, wireframing, Figma prototypes, design systems, and usability testing. Bizzapt Enterprises."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#3D81E3;--electric:#00d2ff;--ice:#A4F4FD;
+  --dark:#0c0c0c;--dark2:#0e1014;--dark3:#111520;
+  --card:rgba(255,255,255,0.03);--line:rgba(255,255,255,0.08);
+  --muted:rgba(255,255,255,0.5);--dim:rgba(255,255,255,0.35);
+  --r:14px;--r2:22px;--r3:32px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:#fff;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{width:min(1200px,calc(100% - 32px));margin:0 auto}
+
+/* marquee */
+.marquee-bar{background:var(--brand);padding:8px 0;overflow:hidden;white-space:nowrap;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:50}
+.marquee-track{display:inline-flex;animation:marquee 35s linear infinite}
+.marquee-track span{padding:0 24px}
+.marquee-track .dot{color:var(--electric)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* nav */
+.topbar{position:sticky;top:0;z-index:200;background:rgba(12,12,12,0.85);backdrop-filter:blur(28px) saturate(180%);border-bottom:1px solid var(--line)}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:10px 0}
+.brand-wrap{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-name{font-weight:700;font-size:1rem;letter-spacing:-0.3px}
+.brand-sub{font-size:0.65rem;color:var(--muted);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{padding:7px 14px;border-radius:999px;font-size:0.85rem;font-weight:500;color:var(--muted);transition:all 0.2s}
+.nav-links a:hover{background:rgba(255,255,255,0.07);color:#fff}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);color:#fff;border-radius:8px;padding:7px 10px;cursor:pointer;transition:all 0.2s;flex-shrink:0}
+.nav-toggle:hover{background:rgba(255,255,255,0.07)}
+.nav-toggle svg{width:20px;height:20px;display:block}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:600;font-size:0.875rem;cursor:pointer;transition:all 0.25s;border:0;padding:11px 22px;font-family:'Inter',sans-serif}
+.btn:hover{transform:translateY(-1px)}
+.btn-apple{background:#fff;color:#000;padding:11px 22px}
+.btn-apple:hover{background:rgba(255,255,255,0.9)}
+.btn-ghost{background:rgba(255,255,255,0.06);color:#fff;border:1px solid var(--line)}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.18)}
+.btn-brand{background:var(--brand);color:#fff;box-shadow:0 4px 24px rgba(61,129,227,0.35)}
+.btn-brand:hover{background:#3070d0;box-shadow:0 8px 40px rgba(61,129,227,0.5)}
+
+/* glass */
+.glass{
+  background:rgba(255,255,255,0.01);
+  backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);
+  position:relative;overflow:hidden;
+}
+.glass::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  padding:1.2px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.12) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.12) 80%,rgba(255,255,255,0.4) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+
+/* pulse */
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--electric);box-shadow:0 0 10px var(--electric);animation:pulse 2s ease-in-out infinite;flex-shrink:0;display:inline-block}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
+
+/* HERO */
+.hero{padding:100px 0 80px;position:relative;z-index:10;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-bg::before{content:'';position:absolute;top:-200px;right:-100px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(61,129,227,0.12) 0%,transparent 70%)}
+.hero-bg::after{content:'';position:absolute;bottom:-200px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.07) 0%,transparent 70%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(61,129,227,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(61,129,227,0.04) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 0%,transparent 100%)}
+.hero-inner{position:relative;z-index:2}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.75rem;color:var(--muted);margin-bottom:28px}
+.breadcrumb a{color:var(--brand);transition:color 0.2s}
+.breadcrumb a:hover{color:var(--electric)}
+.breadcrumb .sep{color:var(--dim)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:rgba(61,129,227,0.1);border:1px solid rgba(61,129,227,0.3);font-size:0.72rem;font-weight:700;letter-spacing:0.5px;color:var(--ice);margin-bottom:24px}
+.hero h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.8rem,7vw,7rem);font-weight:600;line-height:0.94;letter-spacing:-3px;margin-bottom:28px;max-width:800px}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,0.7)}
+.shiny{background-image:linear-gradient(to right,#091020 0%,#0B2551 12.5%,#A4F4FD 32.5%,#00d2ff 50%,#0B2551 67.5%,#091020 87.5%,#091020 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shiny 6s linear infinite}
+@keyframes shiny{0%{background-position:-200% center}100%{background-position:200% center}}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:36px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:52px}
+.hero-stats{display:flex;gap:0;border:1px solid var(--line);border-radius:var(--r2);overflow:hidden;background:rgba(14,16,20,0.8);backdrop-filter:blur(12px);max-width:560px}
+.hstat{flex:1;padding:20px 16px;text-align:center;border-right:1px solid var(--line)}
+.hstat:last-child{border-right:0}
+.hstat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--electric);display:block;line-height:1}
+.hstat-label{font-size:0.68rem;color:var(--muted);margin-top:4px;display:block;font-weight:500}
+
+/* floating mockup */
+.hero-visual{position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:480px;pointer-events:none;z-index:1}
+.hero-visual-wrap{position:relative}
+.mockup-frame{border-radius:20px;overflow:hidden;background:rgba(14,16,20,0.9);border:1px solid rgba(255,255,255,0.1);padding:18px;box-shadow:0 40px 120px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05)}
+.mockup-top{display:flex;gap:7px;margin-bottom:16px}
+.mockup-dot{width:11px;height:11px;border-radius:50%}
+.mockup-dot.r{background:#ff5f57}.mockup-dot.y{background:#febc2e}.mockup-dot.g{background:#28c840}
+.mockup-screen{display:grid;gap:10px}
+.ms-bar{height:8px;border-radius:99px;background:rgba(255,255,255,0.08)}
+.ms-bar.w30{width:30%}.ms-bar.w60{width:60%}.ms-bar.w45{width:45%}.ms-bar.w80{width:80%}.ms-bar.w55{width:55%}.ms-bar.accent{background:rgba(61,129,227,0.4);width:40%}
+.ms-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ms-card{height:60px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)}
+.ms-card.hi{background:rgba(61,129,227,0.15);border-color:rgba(61,129,227,0.3)}
+.ms-btn{height:32px;border-radius:8px;background:var(--brand);opacity:0.7;width:60%}
+.floating-badge{position:absolute;background:rgba(14,16,20,0.95);border:1px solid rgba(61,129,227,0.4);border-radius:14px;padding:12px 16px;backdrop-filter:blur(12px);white-space:nowrap;font-size:0.78rem;font-weight:600;color:#fff;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+.fb1{top:-20px;left:-60px;animation:float1 4s ease-in-out infinite}
+.fb2{bottom:0px;right:-40px;animation:float2 3.5s ease-in-out infinite 0.5s}
+.fb-dot{width:8px;height:8px;border-radius:50%;background:var(--electric);display:inline-block;margin-right:6px}
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* section base */
+section{padding:96px 0;position:relative;z-index:10}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.eyebrow::before{content:'';width:20px;height:2px;background:currentColor;opacity:0.6}
+.eb-blue{color:var(--electric)}
+.eb-light{color:var(--ice)}
+h2.st{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.2rem,5vw,4.2rem);font-weight:600;line-height:1.02;letter-spacing:-1.5px;margin-bottom:14px}
+h2.st em{font-style:italic}
+.ssub{font-size:1rem;line-height:1.72;max-width:540px;color:var(--muted);font-weight:400}
+.sh-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:52px;flex-wrap:wrap}
+
+/* WHAT WE DO */
+.what-sec{background:rgba(14,16,20,0.8);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.wcard{border-radius:var(--r2);padding:30px;background:rgba(17,21,32,0.8);border:1px solid var(--line);backdrop-filter:blur(12px);transition:all 0.3s;position:relative;overflow:hidden}
+.wcard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(61,129,227,0.08),transparent);opacity:0;transition:opacity 0.3s}
+.wcard:hover{border-color:rgba(61,129,227,0.35);transform:translateY(-5px);box-shadow:0 16px 56px rgba(61,129,227,0.12)}
+.wcard:hover::after{opacity:1}
+.wcard-ico{width:56px;height:56px;border-radius:16px;background:rgba(61,129,227,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:20px;position:relative;z-index:1}
+.wcard-ico svg{width:26px;height:26px;stroke:#00d2ff;stroke-width:1.8;fill:none}
+.wcard h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#fff;margin-bottom:10px;position:relative;z-index:1}
+.wcard p{font-size:0.84rem;color:var(--muted);line-height:1.75;position:relative;z-index:1}
+.wcard-num{font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--dim);position:absolute;top:22px;right:22px;z-index:1}
+.wcard-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;position:relative;z-index:1}
+.tag{padding:4px 10px;border-radius:999px;font-size:0.67rem;font-weight:600;background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--line)}
+.tag-b{background:rgba(61,129,227,0.1);color:#7ba8ff;border-color:rgba(61,129,227,0.25)}
+
+/* PROCESS */
+.proc-sec{border-top:1px solid var(--line)}
+.proc-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.proc-flow::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--brand),var(--electric),var(--brand),transparent);z-index:0;opacity:0.35}
+.pstep{text-align:center;padding:0 12px;position:relative;z-index:1}
+.pstep-circle{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:0 auto 24px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:500;transition:all 0.3s;border:1.5px solid}
+.pstep:nth-child(odd) .pstep-circle{background:var(--brand);color:#fff;border-color:var(--brand);box-shadow:0 0 28px rgba(61,129,227,0.4)}
+.pstep:nth-child(even) .pstep-circle{background:transparent;color:var(--electric);border-color:var(--electric);box-shadow:0 0 18px rgba(0,212,255,0.2)}
+.pstep:hover .pstep-circle{transform:scale(1.1)}
+.pstep h4{font-size:0.88rem;font-weight:700;color:#fff;margin-bottom:8px}
+.pstep p{font-size:0.77rem;color:var(--muted);line-height:1.65}
+
+/* DELIVERABLES */
+.del-sec{background:rgba(14,16,20,0.6);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.del-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.del-list{display:grid;gap:16px;margin-top:28px}
+.del-item{display:flex;gap:16px;padding:20px;border-radius:16px;background:rgba(17,21,32,0.8);border:1px solid var(--line);transition:all 0.25s}
+.del-item:hover{border-color:rgba(61,129,227,0.3);background:rgba(61,129,227,0.05)}
+.del-ico{width:44px;height:44px;min-width:44px;border-radius:12px;background:rgba(61,129,227,0.12);display:flex;align-items:center;justify-content:center}
+.del-ico svg{width:20px;height:20px;stroke:#00d2ff;stroke-width:1.8;fill:none}
+.del-item h4{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:4px}
+.del-item p{font-size:0.8rem;color:var(--muted);line-height:1.6}
+.del-visual{border-radius:var(--r3);overflow:hidden;background:rgba(8,10,15,0.9);padding:32px;position:relative;min-height:480px;display:flex;flex-direction:column;gap:16px;border:1px solid var(--line)}
+.del-visual::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(61,129,227,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(61,129,227,0.04) 1px,transparent 1px);background-size:32px 32px}
+.dv-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--electric);letter-spacing:1px;position:relative;z-index:1;margin-bottom:4px}
+.dv-block{position:relative;z-index:1}
+.dv-wireframe{border:1px dashed rgba(61,129,227,0.3);border-radius:12px;padding:16px;display:grid;gap:8px}
+.dv-wrow{height:10px;border-radius:4px;background:rgba(255,255,255,0.07)}
+.dv-wrow.accent{background:rgba(61,129,227,0.25);width:40%}
+.dv-wrow.short{width:55%}
+.dv-wrow.med{width:75%}
+.dv-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.dv-col-box{height:44px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)}
+.dv-col-box.hi{background:rgba(61,129,227,0.15);border-color:rgba(61,129,227,0.3)}
+.dv-prototype{border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:16px;background:rgba(0,212,255,0.03)}
+.dv-proto-bar{height:32px;border-radius:8px;background:rgba(61,129,227,0.3);margin-bottom:10px;display:flex;align-items:center;padding:0 12px;gap:8px}
+.dv-proto-dot{width:8px;height:8px;border-radius:50%}
+.dv-proto-dot.on{background:var(--electric)}.dv-proto-dot.off{background:rgba(255,255,255,0.2)}
+.dv-proto-content{display:grid;gap:6px}
+.dv-proto-line{height:8px;border-radius:4px;background:rgba(255,255,255,0.1)}
+.dv-component{border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;display:flex;gap:10px;align-items:center}
+.dv-comp-circle{width:36px;height:36px;min-width:36px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--electric));opacity:0.6}
+.dv-comp-lines{flex:1;display:grid;gap:5px}
+.dv-comp-line{height:7px;border-radius:4px;background:rgba(255,255,255,0.1)}
+.dv-comp-line.s{width:50%;background:rgba(61,129,227,0.25)}
+
+/* TOOLS */
+.tools-sec{border-top:1px solid var(--line)}
+.tools-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:40px}
+.tool-pill{display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;background:rgba(17,21,32,0.9);border:1px solid var(--line);font-size:0.84rem;font-weight:500;color:var(--muted);transition:all 0.25s}
+.tool-pill:hover{border-color:rgba(61,129,227,0.4);color:#fff;background:rgba(61,129,227,0.08)}
+.tool-ico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0}
+.t-figma{background:rgba(255,122,89,0.15);color:#ff7a59}
+.t-adobe{background:rgba(255,0,0,0.12);color:#ff3d3d}
+.t-notion{background:rgba(255,255,255,0.08);color:#ddd}
+.t-lottie{background:rgba(0,212,255,0.12);color:#00d2ff}
+.t-maze{background:rgba(100,60,255,0.15);color:#a07fff}
+.t-zeplin{background:rgba(255,200,0,0.12);color:#ffd000}
+.t-framer{background:rgba(0,200,150,0.12);color:#00c896}
+.t-hs{background:rgba(255,120,0,0.12);color:#ff7800}
+
+/* PRICING */
+.price-sec{background:rgba(14,16,20,0.6);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pc{border-radius:var(--r3);padding:36px 28px;background:linear-gradient(135deg,rgba(0,0,0,0.7),rgba(0,0,0,0.4));backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);transition:all 0.5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0) 50%);pointer-events:none}
+.pc:hover{border-color:rgba(0,210,255,0.5);transform:translateY(-10px);box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+.pc.featured{background:linear-gradient(135deg,rgba(61,129,227,0.2),rgba(0,0,0,0.6));border-color:rgba(61,129,227,0.4)}
+.pbadge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);padding:5px 18px;border-radius:0 0 12px 12px;background:var(--electric);color:#000;font-size:0.67rem;font-weight:800;letter-spacing:1px;white-space:nowrap}
+.ptier{font-size:0.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+.pname{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:#fff;margin-bottom:8px}
+.pprice{display:flex;align-items:baseline;gap:6px;margin-bottom:8px}
+.pprice-amt{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;color:#fff;line-height:1}
+.pprice-note{font-size:0.75rem;color:var(--muted)}
+.pdesc{font-size:0.83rem;color:var(--muted);line-height:1.65;margin-bottom:22px;min-height:3em}
+.pdiv{height:1px;background:var(--line);margin-bottom:22px}
+.pfeats{list-style:none;display:grid;gap:10px;margin-bottom:28px}
+.pfeats li{display:flex;gap:10px;font-size:0.84rem;color:var(--muted)}
+.pfeats li::before{content:'✓';color:var(--electric);font-weight:700;flex-shrink:0}
+.pcta{width:100%;text-align:center;border-radius:12px;padding:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.88rem;transition:all 0.3s}
+.pcta-outline{background:transparent;color:var(--electric);border:1.5px solid rgba(0,212,255,0.35)}
+.pcta-outline:hover{background:rgba(0,212,255,0.08);border-color:var(--electric)}
+.pcta-primary{background:var(--electric);color:#000;border:0;font-weight:800}
+.pcta-primary:hover{background:#00e8ff;transform:scale(1.02)}
+.pcta-ghost{background:rgba(255,255,255,0.06);color:#fff;border:1px solid var(--line)}
+.pcta-ghost:hover{background:rgba(255,255,255,0.1)}
+.price-note{text-align:center;margin-top:32px;font-size:0.82rem;color:var(--dim);line-height:1.6}
+.price-note a{color:var(--electric);border-bottom:1px solid rgba(0,212,255,0.3)}
+
+/* ADD-ONS */
+.addon-sec{border-top:1px solid var(--line)}
+.addon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.acard{padding:22px;border-radius:var(--r2);background:rgba(17,21,32,0.8);border:1px solid var(--line);transition:all 0.25s;text-align:center}
+.acard:hover{border-color:rgba(61,129,227,0.35);transform:translateY(-4px);box-shadow:0 10px 40px rgba(61,129,227,0.1)}
+.acard-ico{width:48px;height:48px;border-radius:14px;background:rgba(61,129,227,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.acard-ico svg{width:22px;height:22px;stroke:#00d2ff;stroke-width:1.8;fill:none}
+.acard h4{font-size:0.88rem;font-weight:700;color:#fff;margin-bottom:6px}
+.acard p{font-size:0.77rem;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.acard-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--electric)}
+
+/* WHY */
+.why-sec{background:rgba(14,16,20,0.6);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.why-list{display:grid;gap:14px;margin-top:24px}
+.why-item{display:flex;gap:16px;padding:18px;border-radius:16px;background:rgba(17,21,32,0.8);border:1px solid var(--line);transition:all 0.25s}
+.why-item:hover{border-color:rgba(61,129,227,0.25);background:rgba(61,129,227,0.05)}
+.why-ico{width:42px;height:42px;min-width:42px;border-radius:11px;background:rgba(61,129,227,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-ico svg{width:19px;height:19px;stroke:#00d2ff;stroke-width:1.8;fill:none}
+.why-item h4{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:3px}
+.why-item p{font-size:0.8rem;color:var(--muted);line-height:1.6}
+.why-vis{border-radius:var(--r3);background:rgba(8,10,15,0.9);border:1px solid var(--line);padding:32px;position:relative;overflow:hidden;min-height:400px;display:flex;flex-direction:column;justify-content:flex-end}
+.why-vis::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(61,129,227,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(61,129,227,0.045) 1px,transparent 1px);background-size:32px 32px}
+.why-glow{position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(61,129,227,0.15) 0%,transparent 70%)}
+.why-big{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:600;color:rgba(255,255,255,0.04);line-height:1;letter-spacing:-4px;position:absolute;top:20px;left:24px}
+.why-cards{position:relative;z-index:2;display:grid;gap:10px}
+.wy-card{padding:16px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:12px;transition:all 0.25s}
+.wy-card:hover{background:rgba(61,129,227,0.1);border-color:rgba(61,129,227,0.3);transform:translateX(4px)}
+.wy-card-ico{width:40px;height:40px;min-width:40px;border-radius:10px;background:rgba(61,129,227,0.15);display:flex;align-items:center;justify-content:center}
+.wy-card-ico svg{width:18px;height:18px;stroke:#00d2ff;stroke-width:1.8;fill:none}
+.wy-card h5{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:2px}
+.wy-card p{font-size:0.74rem;color:var(--muted)}
+
+/* FAQ */
+.faq-sec{border-top:1px solid var(--line)}
+.faq-list{display:grid;gap:12px;max-width:760px;margin:40px auto 0}
+.faq-item{border:1px solid var(--line);border-radius:var(--r2);background:rgba(17,21,32,0.8);overflow:hidden;transition:border-color 0.2s}
+.faq-item.open{border-color:rgba(61,129,227,0.3)}
+.faq-q{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;user-select:none}
+.faq-q h4{font-size:0.92rem;font-weight:600;color:#fff;line-height:1.5}
+.faq-arrow{width:28px;height:28px;min-width:28px;border-radius:8px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;transition:all 0.25s;font-size:0.85rem;color:var(--electric)}
+.faq-item.open .faq-arrow{background:rgba(61,129,227,0.15);transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.25s}
+.faq-item.open .faq-a{max-height:300px;padding:0 24px 20px}
+.faq-a p{font-size:0.85rem;color:var(--muted);line-height:1.75}
+
+/* CTA */
+.cta-sec{padding:80px 0;position:relative;z-index:10}
+.cta-inner{border-radius:var(--r3);padding:80px 48px;text-align:center;position:relative;overflow:hidden;background:rgba(14,16,20,0.8);border:1px solid var(--line);backdrop-filter:blur(20px)}
+.cta-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse at top,rgba(61,129,227,0.2) 0%,transparent 70%);pointer-events:none}
+.cta-inner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,5rem);font-weight:600;line-height:1;letter-spacing:-2px;margin-bottom:20px}
+.cta-inner p{font-size:1rem;color:var(--muted);max-width:440px;margin:0 auto 32px;line-height:1.65}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* FOOTER */
+footer{background:#04060b;color:var(--dim);padding:56px 0 32px;position:relative;z-index:10;border-top:1px solid rgba(255,255,255,0.05)}
+.fgrid{display:grid;grid-template-columns:1.2fr 0.8fr 0.8fr 0.8fr;gap:40px;margin-bottom:48px}
+.fabout{font-size:0.84rem;line-height:1.72;max-width:280px;margin-bottom:20px}
+.fcol h5{font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px}
+.flinks{list-style:none;display:grid;gap:10px}
+.flinks a{font-size:0.84rem;color:var(--dim);transition:color 0.2s}
+.flinks a:hover{color:#7ba8ff}
+.fdiv{height:1px;background:rgba(255,255,255,0.05);margin-bottom:28px}
+.fbtm{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:0.77rem}
+.fbtm-links{display:flex;gap:20px}
+.fbtm-links a{color:var(--dim);transition:color 0.2s;font-size:0.73rem}
+.fbtm-links a:hover{color:#fff}
+.dcred{font-size:0.72rem;color:rgba(255,255,255,0.2)}
+.dcred a{color:#7ba8ff;transition:color 0.2s}
+.dcred a:hover{color:var(--electric)}
+
+/* CONTACT FORM */
+.cform-wrap{background:rgba(14,16,20,0.85);border:1px solid var(--line);border-radius:var(--r3);padding:36px;backdrop-filter:blur(20px)}
+.flabel{font-size:0.72rem;font-weight:700;letter-spacing:0.5px;color:var(--muted);margin-bottom:6px;display:block}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.fg{margin-bottom:14px}
+input,textarea,select{width:100%;padding:12px 15px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,0.04);color:#fff;font-family:'Inter',sans-serif;font-size:0.875rem;outline:none;transition:border-color 0.2s,background 0.2s}
+select option{background:#0d1017}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.22)}
+input:focus,textarea:focus,select:focus{border-color:rgba(61,129,227,0.5);background:rgba(61,129,227,0.06)}
+textarea{min-height:110px;resize:vertical}
+.success-toast{padding:13px 16px;border-radius:11px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.3);color:var(--electric);font-size:0.86rem;margin-top:12px;text-align:center}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-visual{display:none}
+  .hero h1{max-width:100%}
+}
+@media(max-width:1024px){
+  .what-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .addon-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  section{padding:72px 0}
+  .hero{padding:72px 0 56px}
+  .sh-row{flex-direction:column;align-items:flex-start;margin-bottom:36px}
+  .nav-toggle{display:flex;align-items:center;justify-content:center}
+  .nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:4px;padding:12px 0 16px;border-top:1px solid var(--line);margin-top:4px}
+  .nav-links.active{display:flex}
+  .nav-links a{padding:10px 16px;border-radius:10px;font-size:0.9rem}
+  .what-grid{grid-template-columns:1fr}
+  .proc-flow{grid-template-columns:repeat(2,1fr);gap:28px}
+  .proc-flow::before{display:none}
+  .del-grid{grid-template-columns:1fr;gap:36px}
+  .why-grid{grid-template-columns:1fr;gap:36px}
+  .price-grid{grid-template-columns:1fr}
+  .addon-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{max-width:100%;flex-direction:column}
+  .hstat{border-right:0;border-bottom:1px solid var(--line)}
+  .hstat:last-child{border-bottom:0}
+  .fgrid{grid-template-columns:1fr;gap:32px}
+  .fbtm{flex-direction:column;align-items:flex-start;gap:12px}
+  .frow{grid-template-columns:1fr}
+  .cta-inner{padding:56px 24px}
+  .cta-btns{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  section{padding:56px 0}
+  .hero{padding:56px 0 44px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .btn{justify-content:center}
+  .addon-grid{grid-template-columns:1fr}
+  .proc-flow{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>UI/UX Design</span><span class="dot">✦</span>
+    <span>User Research</span><span class="dot">✦</span>
+    <span>Figma Prototypes</span><span class="dot">✦</span>
+    <span>Design Systems</span><span class="dot">✦</span>
+    <span>Usability Testing</span><span class="dot">✦</span>
+    <span>Mobile-First Design</span><span class="dot">✦</span>
+    <span>Wireframing</span><span class="dot">✦</span>
+    <span>UI/UX Design</span><span class="dot">✦</span>
+    <span>User Research</span><span class="dot">✦</span>
+    <span>Figma Prototypes</span><span class="dot">✦</span>
+    <span>Design Systems</span><span class="dot">✦</span>
+    <span>Usability Testing</span><span class="dot">✦</span>
+    <span>Mobile-First Design</span><span class="dot">✦</span>
+    <span>Wireframing</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="topbar">
+  <div class="container nav">
+    <div class="brand-wrap">
+      <img src="https://i.postimg.cc/xdFfCLnW/Screenshot-(153).png" alt="Bizzapt Logo" style="width:52px;height:52px;object-fit:contain;border-radius:10px;flex-shrink:0"/>
+      <div>
+        <div class="brand-name">Bizzapt Enterprises</div>
+        <div class="brand-sub">Digital Growth Partner</div>
+      </div>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Floating Visual -->
+  <div class="hero-visual">
+    <div class="hero-visual-wrap">
+      <div class="floating-badge fb1"><span class="fb-dot"></span>Figma Prototype Ready</div>
+      <div class="mockup-frame">
+        <div class="mockup-top">
+          <div class="mockup-dot r"></div>
+          <div class="mockup-dot y"></div>
+          <div class="mockup-dot g"></div>
+        </div>
+        <div class="mockup-screen">
+          <div class="ms-bar accent"></div>
+          <div class="ms-bar w80"></div>
+          <div class="ms-bar w60"></div>
+          <div style="height:12px"></div>
+          <div class="ms-row">
+            <div class="ms-card hi"></div>
+            <div class="ms-card"></div>
+          </div>
+          <div class="ms-row">
+            <div class="ms-card"></div>
+            <div class="ms-card hi"></div>
+          </div>
+          <div style="height:8px"></div>
+          <div class="ms-bar w45"></div>
+          <div class="ms-bar w30"></div>
+          <div style="height:8px"></div>
+          <div class="ms-btn"></div>
+        </div>
+      </div>
+      <div class="floating-badge fb2"><span class="fb-dot"></span>Usability Score 94/100</div>
+    </div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="index.html#services">Services</a>
+      <span class="sep">/</span>
+      <span>UI/UX Design</span>
+    </div>
+    <div class="hero-eyebrow"><span class="pulse"></span> Service 04 of 06</div>
+    <h1>
+      Design that<br/>
+      <em>feels</em> <span class="shiny">effortless.</span>
+    </h1>
+    <p class="hero-sub">We craft interfaces that users love — grounded in research, refined through testing, and built to convert visitors into loyal customers. Beautiful AND functional.</p>
+    <div class="hero-actions">
+      <a class="btn btn-apple" href="#contact">Start a Design Project</a>
+      <a class="btn btn-ghost" href="#pricing">View Pricing →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-label">Mobile-First Approach</span></div>
+      <div class="hstat"><span class="hstat-num">5-Step</span><span class="hstat-label">Design Process</span></div>
+      <div class="hstat"><span class="hstat-num">∞</span><span class="hstat-label">Revisions on Growth+</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-sec" id="services">
+  <div class="container">
+    <div class="sh-row">
+      <div>
+        <div class="eyebrow eb-blue">What We Offer</div>
+        <h2 class="st">Every stage of design,<br/><em>covered.</em></h2>
+      </div>
+      <p class="ssub">From the first user interview to a pixel-perfect handoff file — we handle the entire design lifecycle so your product feels intentional at every click.</p>
+    </div>
+    <div class="what-grid">
+      <div class="wcard reveal">
+        <span class="wcard-num">01</span>
+        <div class="wcard-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>User Research</h3>
+        <p>We talk to your real users — running interviews, surveys, and competitor analysis to uncover what they actually need (not what you assume they need).</p>
+        <div class="wcard-tags"><span class="tag tag-b">User Interviews</span><span class="tag">Competitor Analysis</span><span class="tag">Surveys</span><span class="tag">Persona Creation</span></div>
+      </div>
+      <div class="wcard reveal d1">
+        <span class="wcard-num">02</span>
+        <div class="wcard-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <h3>Wireframing & Architecture</h3>
+        <p>Clear, structured wireframes that map the user journey — before a single colour is chosen. We nail the structure first so design decisions are grounded in logic.</p>
+        <div class="wcard-tags"><span class="tag tag-b">Low-fi Wireframes</span><span class="tag">Information Architecture</span><span class="tag">User Flows</span></div>
+      </div>
+      <div class="wcard reveal d2">
+        <span class="wcard-num">03</span>
+        <div class="wcard-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="#00d2ff"/><circle cx="17.5" cy="10.5" r=".5" fill="#00d2ff"/><circle cx="8.5" cy="7.5" r=".5" fill="#00d2ff"/><circle cx="6.5" cy="12.5" r=".5" fill="#00d2ff"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+        </div>
+        <h3>High-Fidelity UI Design</h3>
+        <p>Pixel-perfect, production-ready screens — crafted in Figma with attention to every micro-detail, colour system, typography scale, and spacing grid.</p>
+        <div class="wcard-tags"><span class="tag tag-b">Figma Design</span><span class="tag">Visual Design</span><span class="tag">Responsive UI</span><span class="tag">Dark/Light Modes</span></div>
+      </div>
+      <div class="wcard reveal">
+        <span class="wcard-num">04</span>
+        <div class="wcard-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <h3>Interactive Prototypes</h3>
+        <p>Clickable, realistic prototypes that let you experience the product before a line of code is written. Test, validate, and sell your idea with confidence.</p>
+        <div class="wcard-tags"><span class="tag tag-b">Figma Prototypes</span><span class="tag">Interaction Design</span><span class="tag">Micro-Animations</span></div>
+      </div>
+      <div class="wcard reveal d1">
+        <span class="wcard-num">05</span>
+        <div class="wcard-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Design Systems</h3>
+        <p>A reusable component library and style guide your dev team can work from — keeping every screen consistent as you scale. Build once, use everywhere.</p>
+        <div class="wcard-tags"><span class="tag tag-b">Component Library</span><span class="tag">Style Guide</span><span class="tag">Token Systems</span><span class="tag">Dev Handoff</span></div>
+      </div>
+      <div class="wcard reveal d2">
+        <span class="wcard-num">06</span>
+        <div class="wcard-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Usability Testing</h3>
+        <p>We put designs in front of real users, gather feedback, and iterate until the experience is genuinely frictionless. No guessing — only evidence.</p>
+        <div class="wcard-tags"><span class="tag tag-b">User Testing</span><span class="tag">A/B Testing</span><span class="tag">Heatmap Analysis</span><span class="tag">Iterations</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="proc-sec" id="process">
+  <div class="container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 56px">
+      <div class="eyebrow eb-blue" style="justify-content:center">Our Design Process</div>
+      <h2 class="st">Research first. <em>Pixel-perfect</em> last.</h2>
+      <p class="ssub" style="margin:0 auto">Every project follows a proven 5-step process — so there are no surprises, no re-do's, and no wasted budget.</p>
+    </div>
+    <div class="proc-flow">
+      <div class="pstep reveal">
+        <div class="pstep-circle">01</div>
+        <h4>Discover</h4>
+        <p>User interviews, competitor audit, goals & KPIs aligned with your team.</p>
+      </div>
+      <div class="pstep reveal d1">
+        <div class="pstep-circle">02</div>
+        <h4>Define</h4>
+        <p>Personas, user journeys, and information architecture mapped out clearly.</p>
+      </div>
+      <div class="pstep reveal d2">
+        <div class="pstep-circle">03</div>
+        <h4>Design</h4>
+        <p>Wireframes → High-fi screens → Interactive prototype in Figma.</p>
+      </div>
+      <div class="pstep reveal d3">
+        <div class="pstep-circle">04</div>
+        <h4>Test</h4>
+        <p>Usability sessions, feedback loops, and refinements until it's right.</p>
+      </div>
+      <div class="pstep reveal d4">
+        <div class="pstep-circle">05</div>
+        <h4>Handoff</h4>
+        <p>Developer-ready files, specs, assets, and a design system if included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="del-sec">
+  <div class="container del-grid">
+    <div>
+      <div class="eyebrow eb-light">What You Get</div>
+      <h2 class="st">Clear deliverables,<br/><em>zero ambiguity.</em></h2>
+      <p class="ssub">Every project ends with tangible files and documentation you own completely — ready for your development team to build from.</p>
+      <div class="del-list">
+        <div class="del-item reveal">
+          <div class="del-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <div>
+            <h4>Figma Source Files</h4>
+            <p>Full editable Figma files with all frames, components, and auto-layout intact. Yours to keep.</p>
+          </div>
+        </div>
+        <div class="del-item reveal d1">
+          <div class="del-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="#00d2ff"/><circle cx="17.5" cy="10.5" r=".5" fill="#00d2ff"/><circle cx="8.5" cy="7.5" r=".5" fill="#00d2ff"/><circle cx="6.5" cy="12.5" r=".5" fill="#00d2ff"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          </div>
+          <div>
+            <h4>Clickable Prototype</h4>
+            <p>A shareable Figma prototype link you can demo to investors, stakeholders, or dev teams.</p>
+          </div>
+        </div>
+        <div class="del-item reveal d2">
+          <div class="del-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <h4>Design Specification Document</h4>
+            <p>Spacing, colours, typography tokens, and component states — documented so developers build it exactly right.</p>
+          </div>
+        </div>
+        <div class="del-item reveal d3">
+          <div class="del-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <h4>Exported Assets</h4>
+            <p>All icons, illustrations, and images exported at multiple resolutions — web and mobile ready.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="del-visual reveal d2">
+      <div class="dv-label">// Figma Design Handoff</div>
+      <div class="dv-block">
+        <div class="dv-wireframe">
+          <div class="dv-wrow accent"></div>
+          <div class="dv-wrow short"></div>
+          <div class="dv-wrow med"></div>
+          <div style="height:6px"></div>
+          <div class="dv-cols">
+            <div class="dv-col-box hi"></div>
+            <div class="dv-col-box"></div>
+            <div class="dv-col-box"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dv-label" style="margin-top:16px">// Interactive Prototype</div>
+      <div class="dv-block">
+        <div class="dv-prototype">
+          <div class="dv-proto-bar">
+            <div class="dv-proto-dot on"></div>
+            <div class="dv-proto-dot off"></div>
+            <div class="dv-proto-dot off"></div>
+          </div>
+          <div class="dv-proto-content">
+            <div class="dv-proto-line" style="width:60%"></div>
+            <div class="dv-proto-line" style="width:80%"></div>
+            <div class="dv-proto-line" style="width:45%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dv-label" style="margin-top:16px">// Component Library</div>
+      <div class="dv-block">
+        <div class="dv-component">
+          <div class="dv-comp-circle"></div>
+          <div class="dv-comp-lines">
+            <div class="dv-comp-line s"></div>
+            <div class="dv-comp-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools-sec">
+  <div class="container" style="text-align:center">
+    <div class="eyebrow eb-blue" style="justify-content:center">Tools We Use</div>
+    <h2 class="st">Industry-standard tools,<br/><em>expert hands.</em></h2>
+    <p class="ssub" style="margin:0 auto">We work with the best design tools so your files are portable, collaborative, and ready for any dev team.</p>
+    <div class="tools-grid">
+      <div class="tool-pill"><div class="tool-ico t-figma">F</div>Figma</div>
+      <div class="tool-pill"><div class="tool-ico t-adobe">Ai</div>Adobe Illustrator</div>
+      <div class="tool-pill"><div class="tool-ico t-adobe" style="font-size:0.6rem">Ps</div>Adobe Photoshop</div>
+      <div class="tool-pill"><div class="tool-ico t-notion">N</div>Notion (Docs)</div>
+      <div class="tool-pill"><div class="tool-ico t-lottie">L</div>Lottie Animations</div>
+      <div class="tool-pill"><div class="tool-ico t-maze">M</div>Maze (User Testing)</div>
+      <div class="tool-pill"><div class="tool-ico t-framer">Fr</div>Framer</div>
+      <div class="tool-pill"><div class="tool-ico t-hs">HS</div>HotJar (Heatmaps)</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-sec" id="pricing">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px">
+      <div class="eyebrow eb-blue" style="justify-content:center">Transparent Pricing</div>
+      <h2 class="st">Simple, <em>honest</em> UI/UX pricing.</h2>
+      <p class="ssub" style="margin:0 auto">No hourly billing surprises. Fixed-scope packages designed for startup budgets — with room to grow.</p>
+    </div>
+    <div class="price-grid">
+      <!-- Starter -->
+      <div class="pc reveal">
+        <span class="ptier">Starter</span>
+        <div class="pname">Design Essentials</div>
+        <div class="pprice">
+          <span class="pprice-amt">Contact Us</span>
+        </div>
+        <p class="pdesc">Perfect for startups that need a polished UI for a landing page, simple app, or MVP.</p>
+        <div class="pdiv"></div>
+        <ul class="pfeats">
+          <li>Up to 5 screens / pages</li>
+          <li>High-fidelity Figma UI design</li>
+          <li>Mobile-responsive layouts</li>
+          <li>Basic style guide (colors, fonts)</li>
+          <li>Clickable prototype</li>
+          <li>2 rounds of revisions</li>
+          <li>Figma file handoff</li>
+          <li>5-day delivery estimate</li>
+        </ul>
+        <button class="pcta pcta-outline" onclick="scrollToContact()">Get Started</button>
+      </div>
+      <!-- Growth (featured) -->
+      <div class="pc featured reveal d1">
+        <div class="pbadge">Most Popular</div>
+        <span class="ptier">Growth</span>
+        <div class="pname">Full Product Design</div>
+        <div class="pprice">
+          <span class="pprice-amt">Contact Us</span>
+        </div>
+        <p class="pdesc">For startups building a full product — web app, SaaS dashboard, or multi-screen mobile app.</p>
+        <div class="pdiv"></div>
+        <ul class="pfeats">
+          <li>Up to 15 screens / pages</li>
+          <li>User research & persona creation</li>
+          <li>Wireframes + High-fi UI</li>
+          <li>Full interactive prototype</li>
+          <li>Design system (components + tokens)</li>
+          <li>Usability testing session</li>
+          <li>Developer handoff documentation</li>
+          <li>Unlimited revisions</li>
+          <li>Priority support & weekly call</li>
+        </ul>
+        <button class="pcta pcta-primary" onclick="scrollToContact()">Get Started</button>
+      </div>
+      <!-- Enterprise -->
+      <div class="pc reveal d2">
+        <span class="ptier">Enterprise</span>
+        <div class="pname">Custom Engagement</div>
+        <div class="pprice">
+          <span class="pprice-amt">Let's Talk</span>
+        </div>
+        <p class="pdesc">Full-scale design partnership for complex products — ongoing retainer, multiple streams, and dedicated designer.</p>
+        <div class="pdiv"></div>
+        <ul class="pfeats">
+          <li>Unlimited screens & iterations</li>
+          <li>Dedicated UI/UX designer</li>
+          <li>Full discovery & research sprint</li>
+          <li>End-to-end design system</li>
+          <li>Multiple rounds of usability testing</li>
+          <li>Motion & micro-animation design</li>
+          <li>Monthly retainer available</li>
+          <li>SLA-backed delivery</li>
+        </ul>
+        <button class="pcta pcta-ghost" onclick="scrollToContact()">Let's Talk</button>
+      </div>
+    </div>
+    <p class="price-note">
+      All prices are quoted based on project scope. We'll send you a clear estimate after a free 30-min discovery call.<br/>
+      Need something smaller or bigger? <a href="#contact">Just reach out</a> — we're flexible.
+    </p>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addon-sec">
+  <div class="container">
+    <div style="text-align:center;max-width:540px;margin:0 auto 12px">
+      <div class="eyebrow eb-light" style="justify-content:center">Add-On Services</div>
+      <h2 class="st">Need something <em>extra?</em></h2>
+      <p class="ssub" style="margin:0 auto">Stack on individual add-ons to any package — tailored exactly to what you need.</p>
+    </div>
+    <div class="addon-grid">
+      <div class="acard reveal">
+        <div class="acard-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3z"/></svg></div>
+        <h4>Logo & Brand Identity</h4>
+        <p>Logo, colour palette, typography, and brand guidelines delivered as a full brand kit.</p>
+        <div class="acard-price">Add-On</div>
+      </div>
+      <div class="acard reveal d1">
+        <div class="acard-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <h4>Mobile App UI</h4>
+        <p>iOS & Android optimised screens following platform-specific design guidelines.</p>
+        <div class="acard-price">Add-On</div>
+      </div>
+      <div class="acard reveal d2">
+        <div class="acard-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h4>Landing Page Design</h4>
+        <p>A high-converting, visually compelling landing page — designed to sell your product.</p>
+        <div class="acard-price">Add-On</div>
+      </div>
+      <div class="acard reveal d3">
+        <div class="acard-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+        <h4>UX Audit (Existing Product)</h4>
+        <p>A thorough audit of your existing product with a prioritised list of UX improvements.</p>
+        <div class="acard-price">Add-On</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY BIZZAPT -->
+<section class="why-sec">
+  <div class="container why-grid">
+    <div>
+      <div class="eyebrow eb-blue">Why Bizzapt</div>
+      <h2 class="st">Design with a<br/><em>startup mindset.</em></h2>
+      <p class="ssub">We know startup constraints — tight budgets, fast timelines, shifting priorities. We design around your reality, not an ideal world.</p>
+      <div class="why-list">
+        <div class="why-item reveal">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h4>Speed without compromise</h4><p>We move fast — first concepts within 48 hours of kickoff — while keeping quality at the centre of everything.</p></div>
+        </div>
+        <div class="why-item reveal d1">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><h4>Collaborative, not siloed</h4><p>You're part of the process — involved in every key decision, never handed a design and told to like it.</p></div>
+        </div>
+        <div class="why-item reveal d2">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div><h4>Business-aware design</h4><p>We design for conversions and outcomes — not just aesthetics. Every design decision has a reason tied to your goals.</p></div>
+        </div>
+        <div class="why-item reveal d3">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div><h4>You own everything</h4><p>Full ownership of all files, assets, and prototypes. No lock-in, no licensing games, no ransom over your own design.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-vis reveal d2">
+      <div class="why-glow"></div>
+      <div class="why-big">Design<br/>That<br/>Works.</div>
+      <div class="why-cards">
+        <div class="wy-card">
+          <div class="wy-card-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-1"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div>
+          <div>
+            <h5>Research-led decisions</h5>
+            <p>No guesses. Every choice backed by data.</p>
+          </div>
+        </div>
+        <div class="wy-card">
+          <div class="wy-card-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div>
+            <h5>Dev-ready handoff</h5>
+            <p>Specs so clear your devs thank you.</p>
+          </div>
+        </div>
+        <div class="wy-card">
+          <div class="wy-card-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div>
+            <h5>Conversion-focused</h5>
+            <p>Beautiful design that actually converts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="container" style="text-align:center">
+    <div class="eyebrow eb-blue" style="justify-content:center">Common Questions</div>
+    <h2 class="st">Everything you <em>wondered</em> about.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Do I need to know design to work with you?</h4>
+          <div class="faq-arrow">+</div>
+        </div>
+        <div class="faq-a"><p>Not at all. We'll guide you through everything — from explaining what wireframes are to walking you through the final prototype. You just need to know what your business needs. We handle all the design thinking and execution.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>How long does a typical UI/UX project take?</h4>
+          <div class="faq-arrow">+</div>
+        </div>
+        <div class="faq-a"><p>A 5-screen Starter project typically takes 5–7 working days. A full product design (15+ screens with research and testing) usually runs 3–5 weeks. We'll give you a clear timeline estimate after our discovery call based on your specific scope.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Will I own the Figma files after the project?</h4>
+          <div class="faq-arrow">+</div>
+        </div>
+        <div class="faq-a"><p>Yes — 100%. Once payment is settled, all source files, assets, and prototypes are transferred to you. No ongoing licensing fees, no subscriptions, no restrictions. You can share them with any developer or future designer.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>What if I don't like the initial designs?</h4>
+          <div class="faq-arrow">+</div>
+        </div>
+        <div class="faq-a"><p>That's what revision rounds are for. Starter includes 2 rounds, Growth includes unlimited revisions. We also do a thorough brief before starting to ensure we're designing in the right direction from day one — reducing surprises significantly.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Can you work with an existing brand or style guide?</h4>
+          <div class="faq-arrow">+</div>
+        </div>
+        <div class="faq-a"><p>Absolutely. If you have an existing brand identity, logo, or style guide we'll design strictly within those guidelines. If you only have a rough idea, we can help define the visual direction as part of the project.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <h4>Do you also build the website / app after designing it?</h4>
+          <div class="faq-arrow">+</div>
+        </div>
+        <div class="faq-a"><p>Yes! Bizzapt also offers Web Development and Website Creation services. Many clients hire us for the full end-to-end — design to development — which gives you the cleanest handoff possible since the same team understands both.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section style="padding:96px 0;position:relative;z-index:10;background:rgba(14,16,20,0.6);border-top:1px solid var(--line)" id="contact">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start">
+    <div>
+      <div class="eyebrow eb-blue">Start a Project</div>
+      <h2 class="st">Let's design<br/><em>something great.</em></h2>
+      <p class="ssub" style="margin-bottom:28px">Tell us what you're building. We'll respond within 24 hours with a clear scope, honest estimate, and a free 30-min discovery call offer.</p>
+      <div style="display:grid;gap:16px">
+        <div class="why-item">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h4>Response within 24 hours</h4><p>We move fast. No week-long waits for a simple quote.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><h4>Free 30-min discovery call</h4><p>No pitch, no pressure — just clarity on how we can help.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <div><h4>Fixed-scope, clear pricing</h4><p>Every proposal is scoped specifically for you — no hidden costs.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="cform-wrap glass reveal">
+      <div style="margin-bottom:22px">
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px">UI/UX Design Enquiry</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#fff;font-weight:600">Tell us about your project</div>
+      </div>
+      <form id="cform" onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div><label class="flabel">Your Name</label><input type="text" name="name" placeholder="Jane Smith" required/></div>
+          <div><label class="flabel">Email Address</label><input type="email" name="email" placeholder="jane@startup.com" required/></div>
+        </div>
+        <div class="fg"><label class="flabel">What are you building?</label>
+          <select name="product">
+            <option>Web App / SaaS Dashboard</option>
+            <option>Mobile App (iOS / Android)</option>
+            <option>Landing Page / Website</option>
+            <option>E-commerce Store</option>
+            <option>MVP / Prototype</option>
+            <option>Redesign of existing product</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label class="flabel">Package Interest</label>
+          <select name="package">
+            <option>Design Essentials (Starter)</option>
+            <option>Full Product Design (Growth)</option>
+            <option>Custom Engagement (Enterprise)</option>
+            <option>Not sure yet — need guidance</option>
+          </select>
+        </div>
+        <div class="fg"><label class="flabel">Tell Us More</label>
+          <textarea name="message" placeholder="What does your product do? Who are your users? Do you have a timeline or budget in mind?" required></textarea>
+        </div>
+        <button class="btn btn-brand" type="submit" style="width:100%;border-radius:12px;padding:15px;font-size:0.95rem;justify-content:center">
+          Send Enquiry →
+        </button>
+        <div id="form-success" style="display:none" class="success-toast">✓ Enquiry received! We'll be in touch within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta-inner glass">
+      <div class="cta-glow"></div>
+      <h2>Ready to make your<br/><em>product unforgettable?</em></h2>
+      <p>Great design is the difference between a product users love and one they abandon. Let's build something that genuinely works.</p>
+      <div class="cta-btns">
+        <a class="btn btn-apple" href="#contact">Start a Design Project</a>
+        <a class="btn btn-ghost" href="index.html">← Back to All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="fgrid">
+      <div>
+        <div style="width:60px;height:60px;border-radius:12px;overflow:hidden;margin-bottom:16px;box-shadow:0 0 20px rgba(61,129,227,0.25)">
+          <img src="https://i.postimg.cc/Ls09Xj2G/Screenshot-(152).png" alt="Bizzapt Logo" style="width:100%;height:100%;object-fit:contain"/>
+        </div>
+        <p class="fabout">Bizzapt Enterprises is a digital growth partner for startups — helping them build, design, and scale their digital presence.</p>
+      </div>
+      <div class="fcol">
+        <h5>UI/UX Services</h5>
+        <ul class="flinks">
+          <li><a href="#services">User Research</a></li>
+          <li><a href="#services">Wireframing</a></li>
+          <li><a href="#services">UI Design</a></li>
+          <li><a href="#services">Prototyping</a></li>
+          <li><a href="#services">Design Systems</a></li>
+          <li><a href="#services">Usability Testing</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Other Services</h5>
+        <ul class="flinks">
+          <li><a href="digitalmarketing.html">Digital Marketing</a></li>
+          <li><a href="websitecreation.html">Website Creation</a></li>
+          <li><a href="web-services.html">Web Development</a></li>
+          <li><a href="data-analysis.html">Data Analysis</a></li>
+          <li><a href="coaching.html">Live Coaching</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Reach Us</h5>
+        <ul class="flinks">
+          <li><a href="mailto:bizzaptenterprises@gmail.com">bizzaptenterprises@gmail.com</a></li>
+          <li><a href="#contact">Book a Free Call</a></li>
+          <li><a href="#pricing">View Pricing</a></li>
+        </ul>
+        <div style="margin-top:20px;padding:14px;border-radius:12px;background:rgba(61,129,227,0.07);border:1px solid rgba(61,129,227,0.15)">
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7ba8ff;margin-bottom:6px">Serving</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.6">Saudi Arabia · India · UAE<br/>and neighboring regions</div>
+        </div>
+      </div>
+    </div>
+    <div class="fdiv"></div>
+    <div class="fbtm">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="https://i.postimg.cc/Ls09Xj2G/Screenshot-(152).png" alt="Bizzapt Logo" style="width:36px;height:36px;object-fit:contain;border-radius:7px;flex-shrink:0"/>
+        <span>© 2026 Bizzapt Enterprises. All rights reserved.</span>
+      </div>
+      <div class="fbtm-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+      <div class="dcred">Built by <a href="https://rayeesa-portfolio-xhyf.vercel.app/" target="_blank" rel="noreferrer">Rayeesa Mahmood</a> &amp; <a href="https://redakaleem.github.io/" target="_blank" rel="noreferrer">Reda Kaleem</a></div>
+    </div>
+  </div>
+   <div class="dcred">
+  Founder & Website Creator:
+  <a href="https://rayeesa-portfolio-xhyf.vercel.app/" target="_blank" rel="noreferrer">Rayeesa Mahmood</a>
+  |  Founder & Lead Designer:
+  <a href="https://redakaleem.github.io/" target="_blank" rel="noreferrer">Reda Kaleem</a>
+  | Co-Founder & Partner: <strong>Syed Rayyan Ahmed</strong>
+</div>
+</footer>
+
+<script>
+// Reveal on scroll
+const obs = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Nav toggle
+const toggleBtn = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+const iconMenu = document.getElementById('icon-menu');
+const iconClose = document.getElementById('icon-close');
+if(toggleBtn){
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('active');
+    iconMenu.style.display = isOpen ? 'none' : 'block';
+    iconClose.style.display = isOpen ? 'block' : 'none';
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      iconMenu.style.display = 'block';
+      iconClose.style.display = 'none';
+    });
+  });
+}
+
+// FAQ accordion
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// Form
+function handleSubmit(e) {
+  e.preventDefault();
+  const s = document.getElementById('form-success');
+  s.style.display = 'block';
+  e.target.reset();
+  setTimeout(() => { s.style.display = 'none'; }, 5000);
+}
+
+// Scroll to contact
+function scrollToContact() {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

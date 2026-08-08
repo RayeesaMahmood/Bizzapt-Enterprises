@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Website Creation | Bizzapt Enterprises</title>
+<meta name="description" content="Beautiful, conversion-optimised websites for startups — from landing pages to full e-commerce stores. Built by Bizzapt Enterprises."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<!--
+  BRAND SYSTEM NOTE — matches index.html
+  Display face per the design guidelines is "Liham 2.0" (licensed, no public CDN). Every
+  display heading below calls `'Liham 2.0', 'Bricolage Grotesque', sans-serif`, so dropping
+  the licensed font files into the commented @font-face block picks it up site-wide.
+  DM Sans is the UI/body pairing; JetBrains Mono remains the utility/data face for numerals,
+  step markers and tech-stack pills.
+-->
+<!--
+<style>
+@font-face {
+  font-family: 'Liham 2.0';
+  src: url('/fonts/Liham-Regular.woff2') format('woff2');
+  font-weight: 400 800;
+  font-display: swap;
+}
+</style>
+-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ── Bizzapt brand system — Dark Mode (per Design Guidelines) ── */
+  --brand:#5E7D8B;--electric:#8DD4D9;--ice:#C5B2B2;
+  --mauve:#60435B;--soft-mauve:#A98CA0;--champagne:#BFA26A;--graphite:#1A1A1A;
+  --dark:#000000;--dark2:#0a0a0a;--dark3:#111111;
+  --card:rgba(255,255,255,0.03);--line:rgba(255,255,255,0.08);
+  --muted:rgba(255,255,255,0.5);--dim:rgba(255,255,255,0.35);
+  --r:14px;--r2:22px;--r3:32px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--dark);color:#fff;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.container{width:min(1200px,calc(100% - 32px));margin:0 auto}
+
+/* Flow Wave background (Three.js, fixed, full-bleed) */
+#scene{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;display:block}
+
+/* guide lines — "precision alignment guides" per brand recognition system */
+.guide{display:none;pointer-events:none;position:fixed;inset-y:0;width:1px;background:rgba(255,255,255,0.07);z-index:5}
+@media(min-width:768px){.guide{display:block}}
+.guide-l{left:calc(50% - min(600px,calc(50% - 24px)))}
+.guide-r{right:calc(50% - min(600px,calc(50% - 24px)))}
+
+/* marquee */
+.marquee-bar{background:var(--brand);padding:8px 0;overflow:hidden;white-space:nowrap;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;position:relative;z-index:50}
+.marquee-track{display:inline-flex;animation:marquee 35s linear infinite}
+.marquee-track span{padding:0 24px}
+.marquee-track .dot{color:var(--electric)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* nav */
+.topbar{position:sticky;top:0;z-index:200;background:rgba(0,0,0,0.85);backdrop-filter:blur(28px) saturate(180%);border-bottom:1px solid var(--line)}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:10px 0}
+.brand-wrap{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-name{font-weight:700;font-size:1rem;letter-spacing:-0.3px}
+.brand-sub{font-size:0.65rem;color:var(--muted);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{padding:7px 14px;border-radius:999px;font-size:0.85rem;font-weight:500;color:var(--muted);transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,0.07);color:#fff}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);color:#fff;border-radius:8px;padding:7px 10px;cursor:pointer;transition:all 0.2s;flex-shrink:0}
+.nav-toggle:hover{background:rgba(255,255,255,0.07)}
+.nav-toggle svg{width:20px;height:20px;display:block}
+
+/* btn */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:600;font-size:0.875rem;cursor:pointer;transition:all 0.25s;border:0;padding:11px 22px;font-family:'DM Sans',sans-serif}
+.btn:hover{transform:translateY(-1px)}
+.btn-apple{background:#fff;color:#000}
+.btn-apple:hover{background:rgba(255,255,255,0.9)}
+.btn-ghost{background:rgba(255,255,255,0.06);color:#fff;border:1px solid var(--line)}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.18)}
+.btn-brand{background:var(--brand);color:#fff;box-shadow:0 4px 24px rgba(94,125,139,0.35)}
+.btn-brand:hover{background:#4c6774;box-shadow:0 8px 40px rgba(94,125,139,0.5)}
+
+/* glass */
+.glass{background:rgba(255,255,255,0.01);backdrop-filter:blur(12px);box-shadow:inset 0 1px 1px rgba(255,255,255,0.1);position:relative;overflow:hidden}
+.glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;background:linear-gradient(180deg,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.12) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,0.12) 80%,rgba(255,255,255,0.4) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+/* eyebrow */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.eyebrow::before{content:'';width:20px;height:2px;background:currentColor;opacity:0.6}
+.eb-blue{color:var(--electric)}
+.eb-light{color:var(--ice)}
+
+h2.st{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-size:clamp(2.2rem,5vw,4.2rem);font-weight:800;line-height:1.03;letter-spacing:-0.03em;margin-bottom:14px}
+h2.st em{font-style:normal;background:linear-gradient(130deg,#C5B2B2 0%,#A98CA0 45%,#5E7D8B 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ssub{font-size:1rem;line-height:1.72;max-width:540px;color:var(--muted);font-weight:400}
+
+/* pulse */
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--electric);box-shadow:0 0 10px var(--electric);animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* ======== HERO ======== */
+.hero{padding:110px 0 80px;position:relative;z-index:10;text-align:center}
+.breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--muted);margin-bottom:20px}
+.breadcrumb a{color:var(--muted);transition:color 0.2s}
+.breadcrumb a:hover{color:#fff}
+.breadcrumb .sep{color:var(--dim)}
+.breadcrumb .cur{color:var(--electric)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:rgba(94,125,139,0.1);border:1px solid rgba(94,125,139,0.3);font-size:0.72rem;font-weight:700;letter-spacing:0.5px;color:var(--ice);margin-bottom:28px}
+.hero h1{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-size:clamp(2.8rem,7vw,7rem);font-weight:800;line-height:0.98;letter-spacing:-0.03em;margin-bottom:28px}
+.shiny-word{background-image:linear-gradient(to right,#0d0d0d 0%,#1A1A1A 12.5%,#C5B2B2 32.5%,#8DD4D9 50%,#1A1A1A 67.5%,#0d0d0d 87.5%,#0d0d0d 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shiny 6s linear infinite}
+@keyframes shiny{0%{background-position:-200% center}100%{background-position:200% center}}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto 36px;font-weight:400}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* hero stats */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);max-width:700px;margin:52px auto 0;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r2);overflow:hidden}
+.stat-box{padding:22px 16px;background:rgba(10,10,10,0.9);text-align:center;backdrop-filter:blur(8px)}
+.stat-num{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-weight:800;font-size:2.2rem;color:var(--electric);display:block;line-height:1}
+.stat-label{font-size:0.72rem;color:var(--muted);margin-top:5px;display:block;font-weight:500}
+
+/* ======== WHAT WE BUILD ======== */
+.wbuild-sec{padding:96px 0;position:relative;z-index:10}
+.sh-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:52px;flex-wrap:wrap}
+.types-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.type-card{border-radius:var(--r2);overflow:hidden;background:rgba(10,10,10,0.7);border:1px solid var(--line);backdrop-filter:blur(12px);transition:all 0.3s;position:relative;padding:30px;cursor:default}
+.type-card:hover{transform:translateY(-6px);border-color:rgba(94,125,139,0.4);box-shadow:0 12px 48px rgba(94,125,139,0.15)}
+.type-card.featured-card{border-color:rgba(94,125,139,0.35);background:rgba(10,10,10,0.85)}
+.type-card.featured-card::after{content:'Most Requested';position:absolute;top:16px;right:16px;font-size:0.62rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--electric);color:#000}
+.type-ico{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:rgba(94,125,139,0.12)}
+.type-ico svg{width:26px;height:26px;stroke:#8DD4D9;stroke-width:1.8;fill:none}
+.type-card h3{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:10px}
+.type-card p{font-size:0.84rem;color:var(--muted);line-height:1.72;margin-bottom:18px}
+.type-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:4px 10px;border-radius:999px;font-size:0.68rem;font-weight:600;background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--line)}
+.tag-b{background:rgba(94,125,139,0.1);color:#a9c1cb;border-color:rgba(94,125,139,0.25)}
+.type-num{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--dim);margin-bottom:12px;display:block}
+
+/* ======== PLATFORM ======== */
+.platform-sec{padding:96px 0;position:relative;z-index:10;background:rgba(10,10,10,0.7);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.plat-list{display:grid;gap:14px;margin-top:28px}
+.plat-item{display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid var(--line);transition:all 0.25s}
+.plat-item:hover{background:rgba(94,125,139,0.07);border-color:rgba(94,125,139,0.25);transform:translateX(4px)}
+.plat-ico{width:42px;height:42px;min-width:42px;border-radius:11px;background:rgba(94,125,139,0.12);display:flex;align-items:center;justify-content:center}
+.plat-ico svg{width:20px;height:20px;stroke:#8DD4D9;stroke-width:1.8;fill:none}
+.plat-item h5{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:3px}
+.plat-item p{font-size:0.8rem;color:var(--muted);line-height:1.6}
+
+/* tech stack visual */
+.tech-vis{border-radius:var(--r3);background:rgba(5,5,5,0.85);border:1px solid var(--line);padding:36px;position:relative;overflow:hidden;min-height:420px}
+.tech-vis::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(94,125,139,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(94,125,139,0.04) 1px,transparent 1px);background-size:32px 32px}
+.tech-vis::after{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(141,212,217,0.12) 0%,transparent 70%);z-index:0;pointer-events:none}
+.tech-label{font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;position:relative;z-index:2}
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;position:relative;z-index:2}
+.tech-pill{padding:8px 16px;border-radius:999px;font-size:0.78rem;font-weight:600;border:1px solid;white-space:nowrap;transition:all 0.2s;cursor:default}
+.tech-pill:hover{transform:scale(1.04)}
+.tp-blue{background:rgba(94,125,139,0.1);color:#a9c1cb;border-color:rgba(94,125,139,0.3)}
+.tp-cyan{background:rgba(141,212,217,0.08);color:var(--electric);border-color:rgba(141,212,217,0.25)}
+.tp-white{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.6);border-color:var(--line)}
+.tech-divider{height:1px;background:var(--line);margin:18px 0;position:relative;z-index:2}
+
+/* ======== PROCESS ======== */
+.proc-sec{padding:96px 0;position:relative;z-index:10}
+.proc-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.proc-steps::before{content:'';position:absolute;top:30px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--brand),var(--electric),var(--brand),transparent);z-index:0;opacity:0.35}
+.step{text-align:center;padding:0 10px;position:relative;z-index:1}
+.step-circle{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:500;transition:all 0.3s;border:1.5px solid}
+.step:nth-child(odd) .step-circle{background:var(--brand);color:#fff;border-color:var(--brand);box-shadow:0 0 24px rgba(94,125,139,0.4)}
+.step:nth-child(even) .step-circle{background:transparent;color:var(--electric);border-color:var(--electric);box-shadow:0 0 16px rgba(141,212,217,0.2)}
+.step:hover .step-circle{transform:scale(1.12)}
+.step h4{font-size:0.87rem;font-weight:700;color:#fff;margin-bottom:7px}
+.step p{font-size:0.77rem;color:var(--muted);line-height:1.65}
+
+/* ======== DELIVERABLES ======== */
+.deliv-sec{padding:96px 0;position:relative;z-index:10;background:rgba(10,10,10,0.6);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.deliv-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.deliv-list{display:grid;gap:16px;margin-top:28px}
+.deliv-item{display:flex;gap:14px;align-items:flex-start}
+.d-check{width:28px;height:28px;min-width:28px;border-radius:8px;background:rgba(141,212,217,0.1);border:1px solid rgba(141,212,217,0.25);display:flex;align-items:center;justify-content:center;margin-top:2px}
+.d-check svg{width:13px;height:13px;stroke:var(--electric);stroke-width:2.5;fill:none}
+.deliv-item h5{font-size:0.92rem;font-weight:700;color:#fff;margin-bottom:3px}
+.deliv-item p{font-size:0.81rem;color:var(--muted);line-height:1.6}
+
+/* mock browser */
+.browser-mock{border-radius:20px;overflow:hidden;background:#050505;border:1px solid rgba(255,255,255,0.1);box-shadow:0 32px 80px rgba(0,0,0,0.6)}
+.browser-bar{background:#0d0d0d;padding:12px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.browser-dots{display:flex;gap:6px}
+.bdot{width:12px;height:12px;border-radius:50%}
+.bd-r{background:#ff5f57}.bd-y{background:#ffbd2e}.bd-g{background:#28c840}
+.browser-url{flex:1;background:rgba(255,255,255,0.04);border-radius:6px;padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--dim)}
+.browser-content{padding:24px}
+.bc-hero{background:linear-gradient(135deg,rgba(94,125,139,0.15),rgba(141,212,217,0.08));border-radius:12px;padding:24px;margin-bottom:16px;border:1px solid rgba(94,125,139,0.15)}
+.bc-title{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:6px}
+.bc-sub{font-size:0.75rem;color:var(--muted);margin-bottom:14px}
+.bc-btn{display:inline-block;padding:7px 16px;border-radius:999px;background:var(--electric);color:#000;font-size:0.7rem;font-weight:700}
+.bc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bc-card{background:rgba(255,255,255,0.03);border-radius:8px;padding:12px;border:1px solid var(--line)}
+.bc-card-ico{width:24px;height:24px;border-radius:6px;background:rgba(94,125,139,0.2);margin-bottom:8px}
+.bc-card-t{font-size:0.68rem;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:4px}
+.bc-card-s{font-size:0.62rem;color:var(--muted)}
+.bc-nav{display:flex;gap:12px;padding:0 0 14px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.bc-nav-item{font-size:0.7rem;color:var(--dim)}
+.bc-nav-item.active-nav{color:var(--electric);border-bottom:2px solid var(--electric);padding-bottom:4px}
+.bc-perf{display:flex;gap:10px;margin-top:16px}
+.bc-perf-item{flex:1;background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;border:1px solid var(--line);text-align:center}
+.bc-perf-num{font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:600;color:var(--electric);display:block}
+.bc-perf-l{font-size:0.6rem;color:var(--dim);margin-top:2px;display:block}
+
+/* ======== PRICING ======== */
+.price-sec{padding:96px 0;position:relative;z-index:10}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;z-index:2}
+.pc{border-radius:var(--r3);padding:36px 28px;background:linear-gradient(135deg,rgba(0,0,0,0.7),rgba(0,0,0,0.4));backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);transition:all 0.5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0) 50%);pointer-events:none}
+.pc:hover{border-color:rgba(148, 24, 197, 0.5);transform:translateY(-10px);box-shadow:0 24px 80px rgba(0,0,0,0.5)}
+.pc.featured{background:linear-gradient(135deg,rgba(94,125,139,0.2),rgba(0,0,0,0.6));border-color:rgba(94,125,139,0.4)}
+.pbadge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);padding:5px 18px;border-radius:0 0 12px 12px;background:var(--electric);color:#000;font-size:0.67rem;font-weight:800;letter-spacing:1px;white-space:nowrap}
+.ptier{font-size:0.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+.pname{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-size:1.9rem;font-weight:700;color:#fff;margin-bottom:8px}
+.pdesc{font-size:0.83rem;color:var(--muted);line-height:1.65;margin-bottom:22px;min-height:3em}
+.pdiv{height:1px;background:var(--line);margin-bottom:22px}
+.pfeats{list-style:none;display:grid;gap:10px;margin-bottom:28px}
+.pfeats li{display:flex;gap:10px;font-size:0.84rem;color:var(--muted)}
+.pfeats li::before{content:'✓';color:var(--electric);font-weight:700;flex-shrink:0}
+.pcta{width:100%;text-align:center;border-radius:12px;padding:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:all 0.3s}
+.pcta-outline{background:transparent;color:var(--electric);border:1.5px solid rgba(141,212,217,0.35)}
+.pcta-outline:hover{background:rgba(141,212,217,0.08);border-color:var(--electric)}
+.pcta-primary{background:var(--electric);color:#000;border:0;font-weight:800}
+.pcta-primary:hover{background:#a7e4e8;transform:scale(1.02)}
+.pcta-ghost{background:rgba(255,255,255,0.06);color:#fff;border:1px solid var(--line)}
+.pcta-ghost:hover{background:rgba(255,255,255,0.1)}
+
+/* ======== FAQ ======== */
+.faq-sec{padding:96px 0;position:relative;z-index:10;background:rgba(10,10,10,0.6);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+.faq-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:52px;align-items:start}
+.faq-list{display:grid;gap:12px}
+.faq-item{border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,0.02);overflow:hidden;transition:border-color 0.25s}
+.faq-item.open{border-color:rgba(94,125,139,0.3)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:none;border:0;color:#fff;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;text-align:left;gap:12px}
+.faq-q svg{width:18px;height:18px;stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0;transition:transform 0.3s}
+.faq-item.open .faq-q svg{transform:rotate(45deg);stroke:var(--electric)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
+.faq-a p{padding:0 20px 18px;font-size:0.84rem;color:var(--muted);line-height:1.72}
+.faq-item.open .faq-a{max-height:300px}
+
+/* ======== CTA ======== */
+.cta-sec{padding:80px 0;position:relative;z-index:10}
+.cta-inner{border-radius:var(--r3);padding:80px 48px;text-align:center;position:relative;overflow:hidden;background:rgba(10,10,10,0.8);border:1px solid var(--line);backdrop-filter:blur(20px)}
+.cta-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse at top,rgba(94,125,139,0.2) 0%,transparent 70%);pointer-events:none}
+.cta-inner h2{font-family:'Liham 2.0','Bricolage Grotesque',sans-serif;font-size:clamp(2.2rem,5vw,5rem);font-weight:800;line-height:1;letter-spacing:-0.03em;margin-bottom:20px}
+.cta-inner p{font-size:1rem;color:var(--muted);max-width:440px;margin:0 auto 32px;line-height:1.65}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* ======== FOOTER ======== */
+footer{background:#000000;color:var(--dim);padding:56px 0 32px;position:relative;z-index:10;border-top:1px solid rgba(255,255,255,0.05)}
+.fgrid{display:grid;grid-template-columns:1.2fr 0.8fr 0.8fr 0.8fr;gap:40px;margin-bottom:48px}
+.fabout{font-size:0.84rem;line-height:1.72;max-width:280px;margin-bottom:20px}
+.fcol h5{font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px}
+.flinks{list-style:none;display:grid;gap:10px}
+.flinks a{font-size:0.84rem;color:var(--dim);transition:color 0.2s}
+.flinks a:hover{color:#a9c1cb}
+.fdiv{height:1px;background:rgba(255,255,255,0.05);margin-bottom:28px}
+.fbtm{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:0.77rem}
+.fbtm-links{display:flex;gap:20px}
+.fbtm-links a{color:var(--dim);transition:color 0.2s;font-size:0.73rem}
+.fbtm-links a:hover{color:#fff}
+.dcred{font-size:0.72rem;color:rgba(255,255,255,0.2)}
+.dcred a{color:#a9c1cb;transition:color 0.2s}
+.dcred a:hover{color:var(--electric)}
+
+/* ======== RESPONSIVE ======== */
+@media(max-width:1024px){
+  .types-grid{grid-template-columns:repeat(2,1fr)}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .hero{padding:72px 0 56px}
+  .hero h1{letter-spacing:-0.02em}
+  .sh-row{flex-direction:column;align-items:flex-start;margin-bottom:36px}
+  .types-grid{grid-template-columns:1fr}
+  .platform-grid{grid-template-columns:1fr;gap:36px}
+  .deliv-grid{grid-template-columns:1fr;gap:36px}
+  .faq-grid{grid-template-columns:1fr;gap:36px}
+  .proc-steps{grid-template-columns:repeat(2,1fr);gap:28px}
+  .proc-steps::before{display:none}
+  .price-grid{grid-template-columns:1fr}
+  .cta-inner{padding:56px 28px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr;gap:32px}
+  .fbtm{flex-direction:column;align-items:flex-start;gap:12px}
+  .nav-toggle{display:flex;align-items:center;justify-content:center}
+  .nav-links{display:none;width:100%;flex-direction:column;align-items:stretch;gap:4px;padding:12px 0 16px;border-top:1px solid var(--line);margin-top:4px}
+  .nav-links.active{display:flex}
+  .nav-links a{padding:10px 16px;border-radius:10px;font-size:0.9rem}
+  .nav{flex-wrap:wrap;padding:10px 0}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn{width:100%;justify-content:center;max-width:320px}
+  .stats-row{grid-template-columns:1fr;max-width:280px}
+  .cta-btns{flex-direction:column;align-items:center}
+  .bc-cards{grid-template-columns:1fr}
+  .bc-perf{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- Flow Wave animated background (Three.js — see module script at bottom) -->
+<canvas id="scene"></canvas>
+
+<!-- GUIDE LINES -->
+<div class="guide guide-l"></div>
+<div class="guide guide-r"></div>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>Landing Pages</span><span class="dot">✦</span>
+    <span>Business Websites</span><span class="dot">✦</span>
+    <span>E-commerce Stores</span><span class="dot">✦</span>
+    <span>WordPress & Webflow</span><span class="dot">✦</span>
+    <span>Portfolio Sites</span><span class="dot">✦</span>
+    <span>Speed Optimisation</span><span class="dot">✦</span>
+    <span>Mobile-First Design</span><span class="dot">✦</span>
+    <span>SEO Ready</span><span class="dot">✦</span>
+    <span>Landing Pages</span><span class="dot">✦</span>
+    <span>Business Websites</span><span class="dot">✦</span>
+    <span>E-commerce Stores</span><span class="dot">✦</span>
+    <span>WordPress & Webflow</span><span class="dot">✦</span>
+    <span>Portfolio Sites</span><span class="dot">✦</span>
+    <span>Speed Optimisation</span><span class="dot">✦</span>
+    <span>Mobile-First Design</span><span class="dot">✦</span>
+    <span>SEO Ready</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="topbar">
+  <div class="container nav">
+    <div class="brand-wrap">
+      <img src="https://i.postimg.cc/xdFfCLnW/Screenshot-(153).png" alt="Bizzapt Logo" style="width:52px;height:52px;object-fit:contain;border-radius:10px;flex-shrink:0"/>
+      <div>
+        <div class="brand-name">Bizzapt Enterprises</div>
+        <div class="brand-sub">Digital Growth Partner</div>
+      </div>
+    </div>
+    
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#coaching">Coaching</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;z-index:10">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">›</span>
+      <a href="index.html#services">Services</a>
+      <span class="sep">›</span>
+      <span class="cur">Website Creation</span>
+    </div>
+    <div class="hero-eyebrow">
+      <span class="pulse"></span>
+      Service Deep-Dive
+    </div>
+    <h1>
+      Websites that<br/>
+      <span class="shiny-word">convert & grow.</span>
+    </h1>
+    <p class="hero-sub">From a lightning-fast landing page to a full multi-page business site — we design and build websites that make strong first impressions and turn visitors into customers.</p>
+    <div class="hero-actions">
+      <a class="btn btn-apple" href="index.html#contact">Start Your Website</a>
+      <a class="btn btn-ghost" href="#what-we-build">See What We Build →</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><span class="stat-num">5+</span><span class="stat-label">Website Types</span></div>
+      <div class="stat-box"><span class="stat-num">100%</span><span class="stat-label">Mobile-First</span></div>
+      <div class="stat-box"><span class="stat-num">Fast</span><span class="stat-label">Load Speed Focus</span></div>
+      <div class="stat-box"><span class="stat-num">SEO</span><span class="stat-label">Ready on Day One</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section class="wbuild-sec" id="what-we-build">
+  <div class="container">
+    <div class="sh-row">
+      <div>
+        <div class="eyebrow eb-light">What We Build</div>
+        <h2 class="st">The right site for<br/><em>your exact goal.</em></h2>
+      </div>
+      <p class="ssub">Every website type we build is purpose-designed — not a template slapped together, but a thoughtfully crafted digital home for your business.</p>
+    </div>
+    <div class="types-grid">
+      <!-- Landing Page -->
+      <div class="type-card reveal">
+        <span class="type-num">01</span>
+        <div class="type-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <h3>Landing Pages</h3>
+        <p>Single, focused pages built to drive one action — a signup, a purchase, a booking. High-converting copy, clean layout, zero distractions.</p>
+        <div class="type-tags">
+          <span class="tag tag-b">Product Launch</span>
+          <span class="tag">Lead Generation</span>
+          <span class="tag">Event Promo</span>
+          <span class="tag">App Download</span>
+        </div>
+      </div>
+      <!-- Business Website -->
+      <div class="type-card featured-card reveal d1">
+        <span class="type-num">02</span>
+        <div class="type-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Business Websites</h3>
+        <p>A complete multi-page site that tells your story, showcases your services, and builds trust with every visitor. Scalable as you grow.</p>
+        <div class="type-tags">
+          <span class="tag tag-b">Up to 10 Pages</span>
+          <span class="tag">About / Team</span>
+          <span class="tag">Services Pages</span>
+          <span class="tag">Blog / News</span>
+          <span class="tag">Contact Forms</span>
+        </div>
+      </div>
+      <!-- E-commerce -->
+      <div class="type-card reveal d2">
+        <span class="type-num">03</span>
+        <div class="type-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h3>E-commerce Stores</h3>
+        <p>Online stores that feel premium and convert well — product pages, cart, checkout, and payment all set up and ready to sell from day one.</p>
+        <div class="type-tags">
+          <span class="tag tag-b">WooCommerce</span>
+          <span class="tag">Shopify</span>
+          <span class="tag">Product Catalogues</span>
+          <span class="tag">Payment Setup</span>
+        </div>
+      </div>
+      <!-- Portfolio -->
+      <div class="type-card reveal">
+        <span class="type-num">04</span>
+        <div class="type-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 5 12 1.774-5.226L21 14 9 9z"/></svg>
+        </div>
+        <h3>Portfolio Sites</h3>
+        <p>Your work deserves the spotlight. We design clean, beautiful portfolio websites that let your projects do the talking and win you clients.</p>
+        <div class="type-tags">
+          <span class="tag tag-b">Creatives</span>
+          <span class="tag">Designers</span>
+          <span class="tag">Freelancers</span>
+          <span class="tag">Agencies</span>
+        </div>
+      </div>
+      <!-- WordPress / Webflow -->
+      <div class="type-card reveal d1">
+        <span class="type-num">05</span>
+        <div class="type-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>WordPress & Webflow</h3>
+        <p>Built on platforms you can manage yourself. We hand over a site you can update without needing a developer every time — independence by design.</p>
+        <div class="type-tags">
+          <span class="tag tag-b">WordPress CMS</span>
+          <span class="tag">Webflow</span>
+          <span class="tag">Custom Themes</span>
+          <span class="tag">CMS Training</span>
+        </div>
+      </div>
+      <!-- Speed & Optimisation -->
+      <div class="type-card reveal d2">
+        <span class="type-num">06</span>
+        <div class="type-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>Speed Optimisation</h3>
+        <p>Already have a website that's slow or underperforming? We audit and optimise — better Core Web Vitals, faster load times, happier visitors.</p>
+        <div class="type-tags">
+          <span class="tag tag-b">Core Web Vitals</span>
+          <span class="tag">Image Optimisation</span>
+          <span class="tag">Caching</span>
+          <span class="tag">Lighthouse Audit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM & TECH -->
+<section class="platform-sec" id="platforms">
+  <div class="container platform-grid">
+    <div>
+      <div class="eyebrow eb-blue">Platforms & Tech</div>
+      <h2 class="st">Built on tools that<br/><em>last.</em></h2>
+      <p class="ssub">We use the right technology for your goals — not whatever's trendy. Every platform we recommend, we know inside out.</p>
+      <div class="plat-list">
+        <div class="plat-item reveal">
+          <div class="plat-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <h5>WordPress</h5>
+            <p>The world's most flexible CMS. Perfect for business sites and blogs you want to manage yourself — with endless scalability.</p>
+          </div>
+        </div>
+        <div class="plat-item reveal d1">
+          <div class="plat-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+          </div>
+          <div>
+            <h5>Webflow</h5>
+            <p>Designer-quality output with CMS power — ideal for visually rich sites and marketing teams who want to move fast.</p>
+          </div>
+        </div>
+        <div class="plat-item reveal d2">
+          <div class="plat-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+          </div>
+          <div>
+            <h5>Shopify / WooCommerce</h5>
+            <p>For e-commerce stores that need to be live and selling fast — reliable, secure, and built to handle real transaction volume.</p>
+          </div>
+        </div>
+        <div class="plat-item reveal d3">
+          <div class="plat-ico">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div>
+            <h5>Custom HTML/CSS/JS</h5>
+            <p>When you need maximum performance and zero bloat — pure hand-coded sites that load instantly and do exactly what you need.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-vis reveal d1">
+      <p class="tech-label">Frontend Stack</p>
+      <div class="tech-row">
+        <span class="tech-pill tp-blue">HTML5</span>
+        <span class="tech-pill tp-cyan">CSS3</span>
+        <span class="tech-pill tp-blue">JavaScript</span>
+        <span class="tech-pill tp-white">React</span>
+        <span class="tech-pill tp-cyan">Next.js</span>
+      </div>
+      <div class="tech-row">
+        <span class="tech-pill tp-white">Tailwind CSS</span>
+        <span class="tech-pill tp-blue">GSAP</span>
+        <span class="tech-pill tp-cyan">Framer Motion</span>
+      </div>
+      <div class="tech-divider"></div>
+      <p class="tech-label">CMS & Platforms</p>
+      <div class="tech-row">
+        <span class="tech-pill tp-cyan">WordPress</span>
+        <span class="tech-pill tp-blue">Webflow</span>
+        <span class="tech-pill tp-white">Shopify</span>
+        <span class="tech-pill tp-cyan">WooCommerce</span>
+      </div>
+      <div class="tech-divider"></div>
+      <p class="tech-label">Hosting & Performance</p>
+      <div class="tech-row">
+        <span class="tech-pill tp-white">Vercel</span>
+        <span class="tech-pill tp-blue">Netlify</span>
+        <span class="tech-pill tp-cyan">cPanel / VPS</span>
+        <span class="tech-pill tp-white">Cloudflare CDN</span>
+      </div>
+      <div class="tech-divider"></div>
+      <p class="tech-label" style="margin-bottom:12px">Performance Goals</p>
+      <div style="display:flex;gap:10px;position:relative;z-index:2">
+        <div style="flex:1;background:rgba(255,255,255,0.03);border-radius:10px;padding:12px;border:1px solid var(--line);text-align:center">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--electric);display:block">90+</span>
+          <span style="font-size:0.65rem;color:var(--dim);display:block;margin-top:3px">Lighthouse Score</span>
+        </div>
+        <div style="flex:1;background:rgba(255,255,255,0.03);border-radius:10px;padding:12px;border:1px solid var(--line);text-align:center">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--electric);display:block">&lt;2s</span>
+          <span style="font-size:0.65rem;color:var(--dim);display:block;margin-top:3px">Load Time</span>
+        </div>
+        <div style="flex:1;background:rgba(255,255,255,0.03);border-radius:10px;padding:12px;border:1px solid var(--line);text-align:center">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:600;color:var(--electric);display:block">100%</span>
+          <span style="font-size:0.65rem;color:var(--dim);display:block;margin-top:3px">Mobile-First</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PROCESS -->
+<section class="proc-sec" id="process">
+  <div class="container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 56px">
+      <div class="eyebrow eb-blue" style="justify-content:center">How We Build</div>
+      <h2 class="st">From first call to <em>live website.</em></h2>
+      <p class="ssub" style="margin:0 auto">A structured 5-step process so you always know what's happening and what's next — no surprises, no delays.</p>
+    </div>
+    <div class="proc-steps">
+      <div class="step reveal"><div class="step-circle">01</div><h4>Discovery & Brief</h4><p>We learn your goals, audience, competitors, and vision — then create a detailed website brief.</p></div>
+      <div class="step reveal d1"><div class="step-circle">02</div><h4>Sitemap & Wireframes</h4><p>We map every page and layout before a single pixel of design — so structure is solid from the start.</p></div>
+      <div class="step reveal d2"><div class="step-circle">03</div><h4>Design & Review</h4><p>We design in Figma with your brand at the centre. You review, give feedback, and we refine.</p></div>
+      <div class="step reveal d3"><div class="step-circle">04</div><h4>Build & Test</h4><p>We code and build across devices — mobile, tablet, desktop — testing every interaction and edge case.</p></div>
+      <div class="step reveal d4"><div class="step-circle">05</div><h4>Launch & Handover</h4><p>We go live together and walk you through your new site so you can manage it with confidence.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliv-sec">
+  <div class="container deliv-grid">
+    <!-- Browser Mock -->
+    <div class="reveal">
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <div class="browser-dots">
+            <div class="bdot bd-r"></div>
+            <div class="bdot bd-y"></div>
+            <div class="bdot bd-g"></div>
+          </div>
+          <div class="browser-url">bizzapt.com/your-startup</div>
+        </div>
+        <div class="browser-content">
+          <div class="bc-nav">
+            <span class="bc-nav-item active-nav">Home</span>
+            <span class="bc-nav-item">About</span>
+            <span class="bc-nav-item">Services</span>
+            <span class="bc-nav-item">Contact</span>
+          </div>
+          <div class="bc-hero">
+            <div class="bc-title">Your Startup's Big Idea</div>
+            <div class="bc-sub">A clear, compelling headline that makes visitors stay — and convert.</div>
+            <div class="bc-btn">Get Started →</div>
+          </div>
+          <div class="bc-cards">
+            <div class="bc-card">
+              <div class="bc-card-ico"></div>
+              <div class="bc-card-t">Feature One</div>
+              <div class="bc-card-s">Short, powerful benefit statement here.</div>
+            </div>
+            <div class="bc-card">
+              <div class="bc-card-ico" style="background:rgba(141,212,217,0.15)"></div>
+              <div class="bc-card-t">Feature Two</div>
+              <div class="bc-card-s">Short, powerful benefit statement here.</div>
+            </div>
+            <div class="bc-card">
+              <div class="bc-card-ico" style="background:rgba(94,125,139,0.25)"></div>
+              <div class="bc-card-t">Feature Three</div>
+              <div class="bc-card-s">Short, powerful benefit statement here.</div>
+            </div>
+          </div>
+          <div class="bc-perf">
+            <div class="bc-perf-item"><span class="bc-perf-num">98</span><span class="bc-perf-l">Performance</span></div>
+            <div class="bc-perf-item"><span class="bc-perf-num">100</span><span class="bc-perf-l">Accessibility</span></div>
+            <div class="bc-perf-item"><span class="bc-perf-num">95</span><span class="bc-perf-l">Best Practices</span></div>
+            <div class="bc-perf-item"><span class="bc-perf-num">90</span><span class="bc-perf-l">SEO</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- What you get -->
+    <div class="reveal d1">
+      <div class="eyebrow eb-blue">What You Get</div>
+      <h2 class="st">Every site includes<br/><em>all the essentials.</em></h2>
+      <p class="ssub">We don't charge extra for the basics. Every website we build comes with this foundation included.</p>
+      <div class="deliv-list">
+        <div class="deliv-item">
+          <div class="d-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><h5>Fully responsive design</h5><p>Looks and works perfectly on every screen — mobile, tablet, and desktop.</p></div>
+        </div>
+        <div class="deliv-item">
+          <div class="d-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><h5>On-page SEO setup</h5><p>Meta titles, descriptions, alt tags, sitemap, and robots.txt — all configured correctly from launch day.</p></div>
+        </div>
+        <div class="deliv-item">
+          <div class="d-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><h5>Google Analytics integration</h5><p>Know exactly who's visiting, where they're coming from, and what they're doing on your site.</p></div>
+        </div>
+        <div class="deliv-item">
+          <div class="d-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><h5>Contact forms & lead capture</h5><p>Ready-to-go enquiry forms connected to your inbox — so you never miss a lead.</p></div>
+        </div>
+        <div class="deliv-item">
+          <div class="d-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><h5>Speed & performance optimisation</h5><p>Compressed images, clean code, and CDN-ready build — targeting 90+ on Google Lighthouse.</p></div>
+        </div>
+        <div class="deliv-item">
+          <div class="d-check"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><h5>Handover training session</h5><p>We walk you through everything so you can update content, add pages, and manage your site independently.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-sec" id="pricing">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px">
+      <div class="eyebrow eb-blue" style="justify-content:center">Website Pricing</div>
+      <h2 class="st">Simple, <em>honest</em> pricing.</h2>
+      <p class="ssub" style="margin:0 auto;color:var(--muted)">No surprise invoices. No hidden extras. We agree on scope and stick to it — with packages built for startup budgets.</p>
+    </div>
+    <div class="price-grid">
+      <div class="pc reveal">
+        <span class="ptier">Starter</span>
+        <div class="pname">Landing Page</div>
+        <p class="pdesc">One focused page built to drive one clear action. Fast to build, fast to launch.</p>
+        <div class="pdiv"></div>
+        <ul class="pfeats">
+          <li>1-page fully responsive design</li>
+          <li>Hero, features, testimonials, CTA sections</li>
+          <li>Contact / signup form included</li>
+          <li>Basic SEO setup</li>
+          <li>Google Analytics connection</li>
+          <li>2 rounds of revisions</li>
+          <li>Delivery in 7–10 days</li>
+        </ul>
+        <button class="pcta pcta-outline" onclick="window.location.href='index.html#contact'">Get Started</button>
+      </div>
+      <div class="pc featured reveal d1">
+        <div class="pbadge">Most Popular</div>
+        <span class="ptier">Growth</span>
+        <div class="pname">Business Website</div>
+        <p class="pdesc">A complete multi-page site for businesses that are serious about their digital presence.</p>
+        <div class="pdiv"></div>
+        <ul class="pfeats">
+          <li>Up to 10 custom pages</li>
+          <li>Mobile-first responsive design</li>
+          <li>WordPress or Webflow CMS</li>
+          <li>Full on-page SEO setup</li>
+          <li>Blog / news section included</li>
+          <li>Google Analytics + Search Console</li>
+          <li>Unlimited revisions</li>
+          <li>Handover training session</li>
+        </ul>
+        <button class="pcta pcta-primary" onclick="window.location.href='index.html#contact'">Get Started</button>
+      </div>
+      <div class="pc reveal d2">
+        <span class="ptier">Custom</span>
+        <div class="pname">E-commerce / Custom</div>
+        <p class="pdesc">Full e-commerce stores or fully custom-built websites with complex requirements.</p>
+        <div class="pdiv"></div>
+        <ul class="pfeats">
+          <li>Shopify or WooCommerce store</li>
+          <li>Product pages, cart & checkout</li>
+          <li>Payment gateway integration</li>
+          <li>Inventory & order management</li>
+          <li>Custom design system</li>
+          <li>Post-launch support included</li>
+          <li>Ongoing retainer available</li>
+        </ul>
+        <button class="pcta pcta-ghost" onclick="window.location.href='index.html#contact'">Let's Talk</button>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:28px;font-size:0.8rem;color:var(--dim)">All prices are tailored to your specific requirements. Contact us for a personalised quote.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="container faq-grid">
+    <div class="reveal">
+      <div class="eyebrow eb-blue">Common Questions</div>
+      <h2 class="st">Answers to what<br/>you're wondering.</h2>
+      <p class="ssub">Still have questions? Drop us a message — we typically reply within a few hours.</p>
+      <div style="margin-top:32px">
+        <a class="btn btn-brand" href="index.html#contact">Ask Us Anything</a>
+      </div>
+    </div>
+    <div class="faq-list reveal d1">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long does it take to build my website?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Landing pages typically take 7–10 business days. Full business websites are usually delivered in 3–5 weeks depending on scope. E-commerce and custom builds are quoted on a project-by-project basis. We always give you a clear timeline upfront.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Will I be able to update my site myself?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Yes — and that's a priority for us. We build on platforms like WordPress and Webflow specifically so you have full control. Every project includes a handover training session where we walk you through how to make updates, add content, and manage your site without needing a developer.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do you provide hosting and domain?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>We can advise and assist with domain registration and hosting setup, but we recommend you own your hosting account directly — that way you're never dependent on us. We'll guide you to the right hosting provider for your needs and help you set everything up.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if I need changes after launch?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>We offer post-launch support packages and ongoing retainer options. For smaller changes, many clients handle these themselves after the handover training. For larger changes or new features, we're always here — just reach out and we'll scope it quickly.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do you write the copy and create images too?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>We can advise on structure and tone, and we use placeholder content during design. For copywriting and custom photography, we have trusted partners we can connect you with — or you can supply your own content, which most clients prefer to keep messaging authentic.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is SEO included with every website?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Basic on-page SEO is included with every website — meta titles, descriptions, image alt tags, sitemap, and technical setup. For ongoing SEO strategy, content creation, and link building, that falls under our Digital Marketing service and is available as a separate engagement.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-sec" style="position:relative;z-index:10">
+  <div class="container">
+    <div class="cta-inner glass">
+      <div class="cta-glow"></div>
+      <h2>Your website.<br/><em>Live within weeks.</em></h2>
+      <p>Tell us what you need and we'll come back with a clear, honest plan and a fair price — within 24 hours.</p>
+      <div class="cta-btns">
+        <a class="btn btn-apple" href="index.html#contact">Start Your Website →</a>
+        <a class="btn btn-ghost" href="mailto:bizzaptenterprises@gmail.com">Email Us Directly</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="fgrid">
+      <div>
+        <div style="width:60px;height:60px;border-radius:12px;overflow:hidden;margin-bottom:16px;box-shadow:0 0 20px rgba(94,125,139,0.25)">
+          <img src="https://i.postimg.cc/kBJzRnB7/Group-31.png" alt="Bizzapt Logo" style="width:100%;height:100%;object-fit:contain"/>
+        </div>
+        <p class="fabout">Bizzapt Enterprises is a digital growth partner for startups and small businesses — helping them build, market, and scale their digital presence with clarity and care.</p>
+      </div>
+      <div class="fcol">
+        <h5>Services</h5>
+        <ul class="flinks">
+          <li><a href="digitalmarketing.html">Digital Marketing</a></li>
+          <li><a href="website-creation.html">Website Creation</a></li>
+          <li><a href="web-services.html">Web Development</a></li>
+          <li><a href="ui-ux-design.html">UI/UX Design</a></li>
+          <li><a href="data-analysis.html">Data Analysis</a></li>
+          <li><a href="coaching.html">Live Coaching</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Company</h5>
+        <ul class="flinks">
+          <li><a href="index.html#who">About Us</a></li>
+          <li><a href="index.html#process">How We Work</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Reach Us</h5>
+        <ul class="flinks">
+          <li><a href="mailto:bizzaptenterprises@gmail.com">bizzaptenterprises@gmail.com</a></li>
+          <li><a href="index.html#contact">Book a Free Call</a></li>
+          <li><a href="index.html#contact">Get a Quote</a></li>
+        </ul>
+        <div style="margin-top:20px;padding:14px;border-radius:12px;background:rgba(94,125,139,0.07);border:1px solid rgba(94,125,139,0.15)">
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#a9c1cb;margin-bottom:6px">Serving</div>
+          <div style="font-size:0.82rem;color:var(--muted);line-height:1.6">Saudi Arabia · India · UAE<br/>and neighboring regions</div>
+        </div>
+      </div>
+    </div>
+    <div class="fdiv"></div>
+    <div class="fbtm">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="https://i.postimg.cc/kBJzRnB7/Group-31.png" alt="Bizzapt Logo" style="width:36px;height:36px;object-fit:contain;border-radius:7px;flex-shrink:0"/>
+        <span> Bizzapt Enterprises. All rights reserved.</span>
+      </div>
+      <div class="fbtm-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      
+  </div>
+  <div class="dcred">
+  Founder & Website Creator:
+  <a href="https://rayeesa-portfolio-xhyf.vercel.app/" target="_blank" rel="noreferrer">Rayeesa Mahmood</a>
+  |  Founder & Lead Designer:
+  <a href="https://redakaleem.github.io/" target="_blank" rel="noreferrer">Reda Kaleem</a>
+  | Co-Founder & Partner: <strong>Syed Rayyan Ahmed</strong>
+</div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.143.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.143.0/examples/jsm/"
+  }
+}
+</script>
+
+<!-- ── FLOW WAVE BACKGROUND (identical brand-recolored scene used on index.html) ── -->
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js';
+import { CopyShader } from 'three/addons/shaders/CopyShader.js';
+
+const bgColor       = '#000000';
+const flameColor    = '#60435B';
+const flameColor2   = '#A98CA0';
+const flameAmt      = 0.2;
+const atmoColor     = '#C5B2B2';
+const atmoCount     = 300;
+const atmoSize      = 24;
+const atmoSpeed     = 1.0;
+const colorLow      = '#1A1A1A';
+const colorHigh     = '#C5B2B2';
+const opacity       = 0.26;
+const pointSize     = 5.5;
+const brightness    = 0.45;
+const waveHeight    = 3;
+const flow          = 1;
+const tilt          = 0;
+const scale         = 0.275;
+const scrollRise    = 1.0;
+const camStartY     = 7,  camStartZ = 16;
+const camEndY       = 0.8, camEndZ  = -2;
+const lookStartZ    = 2,  lookEndZ  = -16;
+const parallax      = 1.2;
+const pointerRadius   = 7.0;
+const pointerStrength = 0.9;
+
+const Lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+function hexToVec3(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return new THREE.Vector3(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
+}
+
+const SNOISE = `
+vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+float snoise(vec3 v){
+  const vec2 C = vec2(1.0/6.0, 1.0/3.0); const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+  vec3 i = floor(v + dot(v, C.yyy)); vec3 x0 = v - i + dot(i, C.xxx);
+  vec3 g = step(x0.yzx, x0.xyz); vec3 l = 1.0 - g;
+  vec3 i1 = min(g.xyz, l.zxy); vec3 i2 = max(g.xyz, l.zxy);
+  vec3 x1 = x0 - i1 + 1.0 * C.xxx; vec3 x2 = x0 - i2 + 2.0 * C.xxx; vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+  i = mod(i, 289.0);
+  vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+  float n_ = 1.0/7.0; vec3 ns = n_ * D.wyz - D.xzx;
+  vec4 j = p - 49.0 * floor(p * ns.z *ns.z);
+  vec4 x_ = floor(j * ns.z); vec4 y_ = floor(j - 7.0 * x_);
+  vec4 x = x_ *ns.x + ns.yyyy; vec4 y = y_ *ns.x + ns.yyyy; vec4 h = 1.0 - abs(x) - abs(y);
+  vec4 b0 = vec4(x.xy, y.xy); vec4 b1 = vec4(x.zw, y.zw);
+  vec4 s0 = floor(b0)*2.0 + 1.0; vec4 s1 = floor(b1)*2.0 + 1.0; vec4 sh = -step(h, vec4(0.0));
+  vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy; vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+  vec3 p0 = vec3(a0.xy,h.x); vec3 p1 = vec3(a0.zw,h.y); vec3 p2 = vec3(a1.xy,h.z); vec3 p3 = vec3(a1.zw,h.w);
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+  vec4 m = max(0.5 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0); m = m * m;
+  return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+}
+`;
+
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGL1Renderer({ canvas, antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight, false);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.VSMShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+scene.fog = new THREE.Fog(0x000000, 0, 15);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 400);
+camera.position.set(0, 7, 16);
+
+const LAYERS = { NONE: 0, TORUS_SCENE: 1, BLOOM_SCENE: 2, ENTIRE_SCENE: 3 };
+camera.layers.enable(LAYERS.TORUS_SCENE);
+camera.layers.enable(LAYERS.BLOOM_SCENE);
+camera.layers.enable(LAYERS.ENTIRE_SCENE);
+scene.add(camera);
+
+const FinalPass = {
+  uniforms: {
+    iTime: { value: 0 },
+    tDiffuse: { value: null },
+    torusTexture: { value: null },
+    bloomTexture: { value: null },
+    haloTexture: { value: null },
+    uBg: { value: hexToVec3(bgColor) },
+    uFlameA: { value: hexToVec3(flameColor) },
+    uFlameB: { value: hexToVec3(flameColor2) },
+    uFlameAmt: { value: flameAmt }
+  },
+  vertexShader: `
+    varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position, 1.0); }
+  `,
+  fragmentShader: `
+    uniform float iTime; uniform sampler2D tDiffuse; uniform sampler2D bloomTexture; uniform sampler2D torusTexture; uniform sampler2D haloTexture;
+    uniform vec3 uBg; uniform vec3 uFlameA; uniform vec3 uFlameB; uniform float uFlameAmt;
+    varying vec2 vUv;
+    vec3 warp3d(vec3 pos, float t){ float curv=.8,a=1.9,b=0.7; pos*=2.;
+      pos.x+=curv*sin(t+a*pos.y)+t*b; pos.y+=curv*cos(t+a*pos.x);
+      pos.y+=curv*sin(t+a*pos.z)+t*b; pos.z+=curv*cos(t+a*pos.y);
+      pos.z+=curv*sin(t+a*pos.x)+t*b; pos.x+=curv*cos(t+a*pos.z);
+      return 0.5+0.5*cos(pos.xyz+vec3(1,2,4)); }
+    void main(){
+      vec2 uv = 2.*vUv - 1.;
+      vec3 w = pow(warp3d(vec3(uv.x, sin(uv.y), uv.y), iTime*1.5), vec3(1.5));
+      vec3 flame = 1.5*uFlameA*w.x; flame*=w.y; flame += uFlameB*w.z;
+      flame *= smoothstep(0.25, 1., abs(uv.y));
+      float md = smoothstep(-0.7, 1., -uv.y*uv.x); flame *= md*md;
+      vec3 bg = uBg * (1.0 - 0.4 * length(uv));
+      vec3 halo = texture2D(haloTexture, vUv).xyz;
+      gl_FragColor = vec4(bg + flame*uFlameAmt + texture2D(bloomTexture, vUv).xyz + texture2D(torusTexture, vUv).xyz + texture2D(tDiffuse, vUv).xyz + halo, 1.);
+    }
+  `
+};
+
+const renderPass = new RenderPass(scene, camera);
+
+const torusComposer = new EffectComposer(scene, camera);
+torusComposer.renderToScreen = false;
+torusComposer.addPass(renderPass);
+torusComposer.addPass(new ShaderPass(GammaCorrectionShader));
+torusComposer.addPass(new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.22, 0.2, 0));
+torusComposer.addPass(new ShaderPass(CopyShader));
+
+const bloomComposer = new EffectComposer(scene, camera);
+bloomComposer.renderToScreen = false;
+bloomComposer.addPass(renderPass);
+bloomComposer.addPass(new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.4, 0.55, 0));
+bloomComposer.addPass(new ShaderPass(GammaCorrectionShader));
+
+const finalPass = new ShaderPass(FinalPass);
+const finalComposer = new EffectComposer(scene, camera);
+finalComposer.addPass(renderPass);
+finalComposer.addPass(finalPass);
+finalPass.uniforms.bloomTexture.value = bloomComposer.renderTarget1.texture;
+finalPass.uniforms.torusTexture.value = torusComposer.renderTarget1.texture;
+
+const group = new THREE.Group();
+scene.add(group);
+
+const geometry = new THREE.SphereGeometry(4.2, 200, 600);
+
+const uniforms = {
+  uTime: { value: 0 },
+  uStream: { value: 0 },
+  uAppear: { value: 0 },
+  uColLow: { value: hexToVec3(colorLow) },
+  uColHigh: { value: hexToVec3(colorHigh) },
+  uOpacity: { value: opacity },
+  uSize: { value: pointSize },
+  uBrightness: { value: brightness },
+  uWaveHeight: { value: waveHeight },
+  uFlow: { value: flow },
+  uScale: { value: scale },
+  uCursor: { value: new THREE.Vector3() },
+  uRepelRadius: { value: pointerRadius },
+  uRepelStrength: { value: pointerStrength },
+  uActivity: { value: 0 }
+};
+
+const material = new THREE.ShaderMaterial({
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+  uniforms,
+  vertexShader: `
+    uniform float uTime; uniform float uStream; uniform float uSize; uniform float uWaveHeight; uniform float uFlow; uniform float uScale;
+    uniform vec3 uColLow; uniform vec3 uColHigh;
+    uniform vec3 uCursor; uniform float uRepelRadius; uniform float uRepelStrength; uniform float uActivity;
+    varying float vFade; varying vec3 vColor;
+    ${SNOISE}
+    void main() {
+      vec3 wp = vec3(position.x * 13.0, 0.0, position.z * 25.0);
+      wp.x += position.y * 6.0;
+      float zc = wp.z + uStream;
+      float wn = snoise(vec3(wp.x * 0.08, zc * 0.08, uTime * 0.15 * uFlow)) * 2.0;
+      wn += snoise(vec3(wp.x * 0.16, zc * 0.16, uTime * 0.3 * uFlow)) * 0.8;
+      wp.y += wn * uWaveHeight;
+
+      vec3 finalPos = wp * uScale;
+      vec4 modelPosition = modelMatrix * vec4(finalPos, 1.0);
+      vec3 toP = modelPosition.xyz - uCursor;
+      float cd = length(toP);
+      float fall = smoothstep(uRepelRadius, 0.0, cd);
+      modelPosition.xyz += normalize(toP + vec3(0.0001)) * fall * uRepelStrength * uActivity;
+      vec4 mvPosition = viewMatrix * modelPosition;
+
+      float colMix = smoothstep(-3.0, 3.0, position.y + position.x * 0.5);
+      vColor = mix(uColLow, uColHigh, clamp(colMix, 0.0, 1.0));
+      vFade = 1.0;
+
+      gl_PointSize = uSize * (10.0 / -mvPosition.z);
+      gl_PointSize = max(gl_PointSize, 1.5);
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  `,
+  fragmentShader: `
+    uniform float uOpacity; uniform float uBrightness; uniform float uAppear;
+    varying float vFade; varying vec3 vColor;
+    void main() {
+      vec2 xy = gl_PointCoord - 0.5;
+      float ll = length(xy);
+      if (ll > 0.5) discard;
+      float a = smoothstep(0.5, 0.1, ll);
+      gl_FragColor = vec4(vColor * uBrightness, vFade * a * uOpacity * uAppear);
+    }
+  `
+});
+
+const points = new THREE.Points(geometry, material);
+points.frustumCulled = false;
+points.layers.enable(LAYERS.ENTIRE_SCENE);
+group.add(points);
+
+const atmoState = (function () {
+  const N = Math.round(atmoCount);
+  const positions = new Float32Array(N * 3);
+  const sizes = new Float32Array(N);
+  const seeds = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    positions[i * 3]     = 2 * Math.random() - 1;
+    positions[i * 3 + 1] = 2 * Math.random() - 1;
+    positions[i * 3 + 2] = 2 * Math.random() - 1;
+    sizes[i] = atmoSize * (0.4 + Math.random());
+    seeds[i] = Math.random();
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  geo.setAttribute('seed', new THREE.BufferAttribute(seeds, 1));
+
+  const atmoMat = new THREE.ShaderMaterial({
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    depthTest: false,
+    uniforms: {
+      uTime: { value: 0 },
+      uColor: { value: hexToVec3(atmoColor) },
+      uRes: { value: new THREE.Vector2(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio) }
+    },
+    vertexShader: `
+      attribute float size; attribute float seed; uniform float uTime; uniform vec2 uRes;
+      varying float vA;
+      vec3 warp(vec3 p, float t){ float c=0.9,a=1.9,b=0.02,s=0.05; p*=2.;
+        p.x+=c*sin(s*t+a*p.y)+t*b; p.y+=c*cos(s*t+a*p.x); p.y+=c*sin(s*t+a*p.z)+t*b;
+        p.z+=c*cos(s*t+a*p.y); p.z+=c*sin(s*t+a*p.x)+t*b; p.x+=c*cos(s*t+a*p.z);
+        return cos(p+vec3(1,2,4)); }
+      void main(){
+        vec3 v = position*4.0 + warp(position, uTime)*1.2;
+        vec4 mv = modelViewMatrix * vec4(v, 1.0);
+        float r = length(v); float farF = 1.0 - smoothstep(5.0, 6.5, r); float nearF = smoothstep(0.0, 0.5, -mv.z);
+        vA = farF * nearF;
+        gl_PointSize = size * uRes.y / 900.0 / -mv.z; gl_PointSize = max(gl_PointSize, 1.0);
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 uColor; varying float vA;
+      void main(){ vec2 p = gl_PointCoord - 0.5; float l = length(p); if (l > 0.5) discard;
+        float tex = smoothstep(0.5, 0.0, l); gl_FragColor = vec4(uColor * tex, tex * vA * 0.6); }
+    `
+  });
+
+  const pts = new THREE.Points(geo, atmoMat);
+  pts.frustumCulled = false;
+  pts.layers.enable(LAYERS.ENTIRE_SCENE);
+  pts.onBeforeRender = function () {
+    const t = performance.now() / 1000;
+    atmoMat.uniforms.uTime.value = t * atmoSpeed * 8.0;
+    pts.position.copy(camera.position);
+    finalPass.uniforms.iTime.value = t;
+  };
+  scene.add(pts);
+  return { pts, atmoMat };
+})();
+
+let scrollTarget = 0, scrollSmooth = 0, scrollCurrent = 0;
+function onScroll() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  scrollTarget = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+const mouseTarget = { x: 0, y: 0 };
+const mouse = { x: 0, y: 0 };
+const POINTER = { world: new THREE.Vector3(), activity: 0, active: false, lastMove: performance.now() };
+
+window.addEventListener('mousemove', (e) => {
+  mouseTarget.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouseTarget.y = -((e.clientY / window.innerHeight) * 2 - 1);
+  POINTER.active = true;
+  POINTER.lastMove = performance.now();
+}, { passive: true });
+window.addEventListener('mouseout', () => { POINTER.active = false; });
+
+const _ndc = new THREE.Vector3(), _dir = new THREE.Vector3(), _tgt = new THREE.Vector3();
+function updatePointerWorld() {
+  _tgt.set(0, 0, 0);
+  if (POINTER.active) {
+    _ndc.set(mouse.x, mouse.y, 0.5).unproject(camera);
+    _dir.copy(_ndc).sub(camera.position).normalize();
+    const dn = _dir.z;
+    if (Math.abs(dn) > 1e-4) {
+      const tt = -camera.position.z / dn;
+      if (tt > 0 && Number.isFinite(tt)) _tgt.copy(camera.position).addScaledVector(_dir, tt);
+    }
+  }
+  POINTER.world.lerp(_tgt, 0.12);
+  const idle = (performance.now() - POINTER.lastMove) / 1000;
+  POINTER.activity += (((POINTER.active && idle < 3) ? 1 : 0) - POINTER.activity) * 0.06;
+}
+
+const sceneState = {
+  stream: 0,
+  appearStart: performance.now(),
+  t0: performance.now() / 1000
+};
+
+function render(scroll, m) {
+  const t = performance.now() / 1000;
+  const dt = Math.min(0.05, t - sceneState.t0); sceneState.t0 = t;
+  uniforms.uTime.value = t;
+
+  sceneState.stream += dt * (flow * 2.0) * 4.0;
+  uniforms.uStream.value = sceneState.stream;
+  uniforms.uWaveHeight.value = waveHeight * (1 + scroll * scrollRise);
+
+  const ea = Math.min(scroll / 0.35, 1.0);
+  const e = ea * ea * (3 - 2 * ea);
+  const camY = Lerp(camStartY, camEndY, e);
+  const camZ = Lerp(camStartZ, camEndZ, e);
+  camera.position.set(m.x * parallax, camY + m.y * parallax * 0.3, camZ);
+  camera.lookAt(m.x * parallax * 0.5, Lerp(0.0, 0.6, e), Lerp(lookStartZ, lookEndZ, e));
+  group.rotation.x = -tilt;
+  group.rotation.y = 0;
+  updatePointerWorld();
+
+  uniforms.uCursor.value.copy(POINTER.world);
+  uniforms.uActivity.value = POINTER.activity;
+  const elapsed = (performance.now() - sceneState.appearStart) / 1000;
+  uniforms.uAppear.value = Math.max(0, Math.min(1, (elapsed - 0.2) / 1.4));
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  scrollSmooth  = Lerp(scrollSmooth, scrollTarget, 0.10);
+  scrollCurrent = Lerp(scrollCurrent, scrollSmooth, 0.06);
+  mouse.x = Lerp(mouse.x, mouseTarget.x, 0.06);
+  mouse.y = Lerp(mouse.y, mouseTarget.y, 0.06);
+  render(scrollCurrent, mouse);
+
+  camera.layers.set(LAYERS.TORUS_SCENE);  torusComposer.render();
+  camera.layers.set(LAYERS.BLOOM_SCENE);  bloomComposer.render();
+  camera.layers.set(LAYERS.ENTIRE_SCENE); finalComposer.render();
+}
+
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  const dpr = window.devicePixelRatio;
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  [torusComposer, bloomComposer, finalComposer].forEach((c) => {
+    c.setPixelRatio(dpr);
+    c.setSize(w, h);
+  });
+  onScroll();
+}
+window.addEventListener('resize', resize);
+resize();
+animate();
+</script>
+
+<script>
+// Reveal on scroll
+const obs = new IntersectionObserver(
+  entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Mobile nav
+const toggleBtn = document.getElementById('nav-toggle');
+const navLinks = document.getElementById('nav-links');
+const iconMenu = document.getElementById('icon-menu');
+const iconClose = document.getElementById('icon-close');
+toggleBtn.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('active');
+  iconMenu.style.display = isOpen ? 'none' : 'block';
+  iconClose.style.display = isOpen ? 'block' : 'none';
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    iconMenu.style.display = 'block';
+    iconClose.style.display = 'none';
+  });
+});
+
+// FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
